@@ -38,9 +38,11 @@ const Sidebar = () => {
         </Link>
       </LogoDiv>
       <Info>
-        <Topic>
-          <h3 style={{ cursor: "pointer" }}>All Games</h3>
-        </Topic>
+        <Link to="/games">
+          <Topic>
+            <h3 style={{ cursor: "pointer" }}>All Games</h3>
+          </Topic>
+        </Link>
         <Topic>
           <h3>Top</h3>
           <Link to="/best-of-the-year">

@@ -8,11 +8,16 @@ const port = process.env.PORT || 5000;
 const { getPopularGames } = require("./handlers/top250Games");
 const { bestGameYear } = require("./handlers/bestGameYear");
 const { popularOfYear } = require("./handlers/popularOfYear");
+const { allGames } = require("./handlers/allGames");
 
 const app = express();
 app.use(morgan("tiny")); // ??
 app.use(express.static("public")); // ??
 app.use(express.json()); //?
+
+//..............................
+// get all games
+app.get("/api/games", allGames);
 
 //..............................
 // getting random 20 top games
