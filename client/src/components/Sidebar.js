@@ -17,6 +17,7 @@ import adventure from "../assets/adventure.png";
 import puzzle from "../assets/puzzle.png";
 import racing from "../assets/racing.png";
 import sports from "../assets/sports.png";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -32,7 +33,9 @@ const Sidebar = () => {
           src={pishi}
           alt="logo"
         />
-        <LogoTitle>My CatLog</LogoTitle>
+        <Link to="/">
+          <LogoTitle>My CatLog</LogoTitle>
+        </Link>
       </LogoDiv>
       <Info>
         <Topic>
@@ -42,7 +45,9 @@ const Sidebar = () => {
           <h3>Top</h3>
           <LogoTopic text="Best of the year" Icon={GiTrophyCup} />
           <LogoTopic text="Popular in 2021" Icon={BsBarChartLine} />
-          <LogoTopic text="All time top 250" Icon={AiOutlineCrown} />
+          <Link to="/top250games">
+            <LogoTopic text="All time top 250" Icon={AiOutlineCrown} />
+          </Link>
         </Topic>
         <Topic>
           <h3>Library</h3>
@@ -77,6 +82,10 @@ const Div = styled.div`
   position: fixed;
   top: 0;
   color: var(--color-font);
+  a {
+    text-decoration: none;
+    color: var(--color-font);
+  }
   p {
     font-size: 15px;
   }

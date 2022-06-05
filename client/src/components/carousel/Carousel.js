@@ -1,8 +1,23 @@
 import styled from "styled-components";
+import { useRef, useState } from "react";
 import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
 import placeholder from "../../assets/1.PNG";
 
-const Carousel = ({ listRef, handleClick }) => {
+const Carousel = ({ topGames }) => {
+  // setting function for homepage carousel
+  const listRef = useRef();
+  const [slideNumber, setSlideNumber] = useState(0);
+  const handleClick = (direction) => {
+    let distance = listRef.current.getBoundingClientRect().x - 370;
+    if (direction === "left" && slideNumber > 0) {
+      setSlideNumber(slideNumber - 1);
+      listRef.current.style.transform = `translateX(${160 + distance}px)`;
+    }
+    if (direction === "right" && slideNumber < 14) {
+      setSlideNumber(slideNumber + 1);
+      listRef.current.style.transform = `translateX(${-160 + distance}px)`;
+    }
+  };
   return (
     <LlistWrapper>
       <RiArrowLeftSLine
@@ -13,26 +28,9 @@ const Carousel = ({ listRef, handleClick }) => {
         }}
       />
       <Lists ref={listRef}>
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
-        <img src={placeholder} />
+        {topGames?.map((game) => {
+          return <img src={game.background_image} />;
+        })}
       </Lists>
       <RiArrowRightSLine
         size={"30px"}
@@ -86,13 +84,13 @@ const Lists = styled.div`
   transform: translateX(0px);
   transition: all 1s ease;
   img {
-    max-width: 150px;
-    height: 180px;
+    max-width: 170px;
+    max-height: 140px;
     margin-right: 10px;
     cursor: pointer;
     transition: all 200ms ease-in-out;
     :hover {
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
   }
 `;

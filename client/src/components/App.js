@@ -4,6 +4,7 @@ import Home from "./Home";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import styled from "styled-components";
+import TopGames from "./TopGames";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Sidebar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/top250games" component={TopGames}/>
       </Switch>
       </Div>
     </Router>

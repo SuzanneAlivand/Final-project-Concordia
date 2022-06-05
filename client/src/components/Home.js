@@ -1,40 +1,52 @@
 import styled from "styled-components";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import backgroundOne from "../assets/background.jpg";
 import Carousel from "./carousel/Carousel";
+import Spinner from "./spinner/spinner";
 
 const Home = () => {
-  // setting function for homepage carousel
-  const listRef = useRef();
-  const [slideNumber, setSlideNumber] = useState(0);
-  const handleClick = (direction) => {
-    let distance = listRef.current.getBoundingClientRect().x - 350;
-    if (direction === "left" && slideNumber > 0) {
-      setSlideNumber(slideNumber - 1);
-      listRef.current.style.transform = `translateX(${160 + distance}px)`;
+  const [error, setError] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [topGames, setTopGames] = useState([]);
+
+  const page = Math.floor(Math.random() * 13);
+  // fetching some of top games
+  useEffect(() => {
+    if (!loaded) {
+      fetch(`/api/20topgames/${page}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setTopGames(data.data.results);
+        })
+        .catch((error) => setError(true))
+        .finally(() => {
+          setLoaded(true);
+        });
     }
-    if (direction === "right" && slideNumber < 13) {
-      setSlideNumber(slideNumber + 1);
-      listRef.current.style.transform = `translateX(${-160 + distance}px)`;
-    }
-  };
+  }, []);
 
   return (
     <Wrapper>
-      <WelcomeDiv>
-        <h2>
-          Welcome to <spn style={{ color: "#0ccbff" }}>MY Catlog!</spn>
-        </h2>
-        <p>
-          This website helps you to organize and keep track of your video games.
-          Search for any game and add it to your library. Various info about
-          each of your games will be shown to you so that you can decide what to
-          play next. You can also mark any game as in-progress, completed or
-          abandoned.
-        </p>
-        <button>Get started</button>
-      </WelcomeDiv>
-      <Carousel handleClick={handleClick} listRef={listRef} />
+      {topGames.length > 0 ? (
+        <>
+          <WelcomeDiv>
+            <h2>
+              Welcome to <span style={{ color: "#0ccbff" }}>MY Catlog!</span>
+            </h2>
+            <p>
+              This website helps you to organize and keep track of your video
+              games. Search for any game and add it to your library. Various
+              info about each of your games will be shown to you so that you can
+              decide what to play next. You can also mark any game as
+              in-progress, completed or abandoned.
+            </p>
+            <button>Get started</button>
+          </WelcomeDiv>
+          <Carousel topGames={topGames} />
+        </>
+      ) : (
+        <Spinner />
+      )}
     </Wrapper>
   );
 };

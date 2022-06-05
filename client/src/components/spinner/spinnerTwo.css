@@ -1,0 +1,273 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: #fff;
+  color: #333;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000;
+  filter: contrast(25);
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrapper {
+  width: 400px;
+  height: 400px;
+  position: relative;
+}
+
+.particle {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(50%, 50%);
+  filter: blur(10px);
+}
+
+.particle-md-01 {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  transform: translate(50%, 50%);
+  right: 49%;
+  bottom: 47%;
+  -webkit-animation: rotate 3s linear 0s infinite;
+  animation: rotate 3s linear 0s infinite;
+}
+.particle-md-01::after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(10px, 10px);
+  filter: blur(5px);
+}
+
+.particle-md-02 {
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  transform: translate(50%, 50%);
+  right: 57%;
+  bottom: 48%;
+  -webkit-animation: rotate 4s linear 0s infinite;
+  animation: rotate 4s linear 0s infinite;
+}
+.particle-md-02::after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(10px, 10px);
+  filter: blur(5px);
+}
+
+.particle-md-03 {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  transform: translate(50%, 50%);
+  right: 51%;
+  bottom: 52%;
+  -webkit-animation: rotate 5s linear 0s infinite;
+  animation: rotate 5s linear 0s infinite;
+}
+.particle-md-03::after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(20px, 10px);
+  filter: blur(5px);
+}
+
+.particle-sm-01 {
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  transform: translate(50%, 50%);
+  right: 36%;
+  bottom: 52%;
+  -webkit-animation: rotate 3s linear 0s infinite;
+  animation: rotate 3s linear 0s infinite;
+}
+.particle-sm-01::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(20px, 10px);
+  filter: blur(5px);
+}
+
+.particle-sm-02 {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  transform: translate(50%, 50%);
+  right: 56%;
+  bottom: 72%;
+  -webkit-animation: rotate 4s linear 0s infinite;
+  animation: rotate 4s linear 0s infinite;
+}
+.particle-sm-02::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(20px, 10px);
+  filter: blur(5px);
+}
+
+.particle-sm-03 {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  transform: translate(50%, 50%);
+  right: 75%;
+  bottom: 40%;
+  -webkit-animation: rotate 4s linear 0s infinite;
+  animation: rotate 4s linear 0s infinite;
+}
+.particle-sm-03::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(20px, 10px);
+  filter: blur(5px);
+}
+
+.particle-sm-04 {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  transform: translate(50%, 50%);
+  right: 65%;
+  bottom: 50%;
+  -webkit-animation: rotate 4s linear 0s infinite;
+  animation: rotate 4s linear 0s infinite;
+}
+.particle-sm-04::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(20px, 10px);
+  filter: blur(5px);
+}
+
+.particle-sm-05 {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  transform: translate(50%, 50%);
+  right: 70%;
+  bottom: 55%;
+  -webkit-animation: rotate 2s linear 0s infinite;
+  animation: rotate 2s linear 0s infinite;
+}
+.particle-sm-05::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(20px, 10px);
+  filter: blur(5px);
+}
+
+.particle-sm-06 {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  transform: translate(50%, 50%);
+  right: 43%;
+  bottom: 75%;
+  -webkit-animation: rotate 5s linear 0s infinite;
+  animation: rotate 5s linear 0s infinite;
+}
+.particle-sm-06::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(20px, 10px);
+  filter: blur(5px);
+}
+
+.particle-sm-07 {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  transform: translate(50%, 50%);
+  right: 60%;
+  bottom: 75%;
+  -webkit-animation: rotate 3s linear 0s infinite;
+  animation: rotate 3s linear 0s infinite;
+}
+.particle-sm-07::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(20px, 10px);
+  filter: blur(5px);
+}
+
+@-webkit-keyframes rotate {
+  from {
+    transform: translate(50%, 50%) rotate(0deg);
+  }
+  to {
+    transform: translate(50%, 50%) rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(50%, 50%) rotate(0deg);
+  }
+  to {
+    transform: translate(50%, 50%) rotate(360deg);
+  }
+}
