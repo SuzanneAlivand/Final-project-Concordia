@@ -20,7 +20,7 @@ const Header = () => {
 export default Header;
 
 const Div = styled.div`
-  width: inherit;
+  width: 1800;
   height: 80px;
   background-color: var(--color-primary);
   color: var(--color-font);
@@ -32,7 +32,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-  padding-left: 270px;
+  margin-left: 270px;
   justify-content: space-between;
 `;
 

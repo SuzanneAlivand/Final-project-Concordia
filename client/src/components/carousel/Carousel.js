@@ -48,6 +48,7 @@ export default Carousel;
 // styling the carousel
 const LlistWrapper = styled.div`
   background-color: var(--color-primary);
+  padding: 15px 0px;
   overflow: hidden;
   display: flex;
   justify-content: center;
