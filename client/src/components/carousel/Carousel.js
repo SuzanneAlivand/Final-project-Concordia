@@ -13,7 +13,7 @@ const Carousel = ({ topGames }) => {
       setSlideNumber(slideNumber - 1);
       listRef.current.style.transform = `translateX(${160 + distance}px)`;
     }
-    if (direction === "right" && slideNumber < 14) {
+    if (direction === "right" && slideNumber < 12) {
       setSlideNumber(slideNumber + 1);
       listRef.current.style.transform = `translateX(${-160 + distance}px)`;
     }
@@ -84,8 +84,8 @@ const Lists = styled.div`
   transform: translateX(0px);
   transition: all 1s ease;
   img {
-    max-width: 170px;
-    max-height: 140px;
+    max-width: 155px;
+    max-height: 120px;
     margin-right: 10px;
     cursor: pointer;
     transition: all 200ms ease-in-out;

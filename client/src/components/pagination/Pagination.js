@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 
 const Pagination = ({ setPage, pageCount }) => {
   const handlePageClick = (event) => {
-    setPage(event.selected);
+    setPage(event.selected + 1);
   };
 
   return (

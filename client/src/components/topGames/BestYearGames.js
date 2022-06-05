@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import Pagination from "./pagination/Pagination";
-import Spinner from "./spinner/spinner.js";
+import { useState, useEffect } from "react";
+import Pagination from "../pagination/Pagination";
+import Spinner from "../spinner/spinner";
 
-const TopGames = () => {
+const BestYearGames = () => {
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [topGames, setTopGames] = useState([]);
@@ -12,7 +12,7 @@ const TopGames = () => {
   console.log(page);
 
   useEffect(() => {
-    fetch(`/api/top250games?page=${page}`)
+    fetch(`/api/best-of-the-year?page=${page}`)
       .then((res) => res.json())
       .then((data) => {
         setTopGames(data.data.results);
@@ -21,7 +21,6 @@ const TopGames = () => {
       })
       .catch((error) => setError(true));
   }, [page]);
-
   return (
     <>
       {loaded ? (
@@ -38,7 +37,7 @@ const TopGames = () => {
   );
 };
 
-export default TopGames;
+export default BestYearGames;
 
 const Wrapper = styled.div`
   color: var(--color-font);

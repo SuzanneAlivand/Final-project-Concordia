@@ -43,8 +43,12 @@ const Sidebar = () => {
         </Topic>
         <Topic>
           <h3>Top</h3>
-          <LogoTopic text="Best of the year" Icon={GiTrophyCup} />
-          <LogoTopic text="Popular in 2021" Icon={BsBarChartLine} />
+          <Link to="/best-of-the-year">
+            <LogoTopic text="Best of the year" Icon={GiTrophyCup} />
+          </Link>
+          <Link to="/popular2021">
+            <LogoTopic text="Popular in 2021" Icon={BsBarChartLine} />
+          </Link>
           <Link to="/top250games">
             <LogoTopic text="All time top 250" Icon={AiOutlineCrown} />
           </Link>
@@ -56,16 +60,32 @@ const Sidebar = () => {
           <LogoTopic text="Completed" Icon={TiTickOutline} />
           <LogoTopic text="Abandoned" Icon={FiArchive} />
         </Topic>
-        <Topic>
+        <Topic style={{ marginBottom: "120px" }}>
           <h3>Genres</h3>
-          <GenreTopic text="Action" src={action} />
-          <GenreTopic text="Strategy" src={strategy} />
-          <GenreTopic text="RPG" src={rpg} />
-          <GenreTopic text="Shooter" src={shooter} />
-          <GenreTopic text="Adventure" src={adventure} />
-          <GenreTopic text="Puzzle" src={puzzle} />
-          <GenreTopic text="Racing" src={racing} />
-          <GenreTopic text="Sports" src={sports} />
+          <Link to="/genre/action">
+            <GenreTopic text="Action" src={action} />
+          </Link>
+          <Link to="/genre/strategy">
+            <GenreTopic text="Strategy" src={strategy} />
+          </Link>
+          <Link to="/genre/rpg">
+            <GenreTopic text="RPG" src={rpg} />
+          </Link>
+          <Link to="/genre/shooter">
+            <GenreTopic text="Shooter" src={shooter} />
+          </Link>
+          <Link to="/genre/adventure">
+            <GenreTopic text="Adventure" src={adventure} />
+          </Link>
+          <Link to="/genre/puzzle">
+            <GenreTopic text="Puzzle" src={puzzle} />
+          </Link>
+          <Link to="/genre/racing">
+            <GenreTopic text="Racing" src={racing} />
+          </Link>
+          <Link to="/genre/sports">
+            <GenreTopic text="Sports" src={sports} />
+          </Link>
         </Topic>
       </Info>
     </Div>

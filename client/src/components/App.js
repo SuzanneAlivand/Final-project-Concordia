@@ -4,19 +4,39 @@ import Home from "./Home";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import styled from "styled-components";
-import TopGames from "./TopGames";
+import TopGames from "./topGames/TopGames";
+import BestYearGames from "./topGames/BestYearGames";
+import PopularGames from "./topGames/PopularGames";
+import Action from "./genres/Action.js";
+import Strategy from "./genres/Strategy";
+import Shooter from "./genres/Shooter.js";
+import RPG from "./genres/RPG.js";
+import Adventure from "./genres/Adventure.js";
+import Racing from "./genres/Racing.js";
+import Puzzle from "./genres/Puzzle.js";
+import Sports from "./genres/Sports.js";
 
 const App = () => {
   return (
     <Router>
       <GlobalStyles />
       <Div>
-      <Header />
-      <Sidebar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/top250games" component={TopGames}/>
-      </Switch>
+        <Header />
+        <Sidebar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/top250games" component={TopGames} />
+          <Route path="/popular2021" component={PopularGames} />
+          <Route path="/best-of-the-year" component={BestYearGames} />
+          <Route exath path="/genre/action" component={Action} />
+          <Route exath path="/genre/strategy" component={Strategy} />
+          <Route exath path="/genre/rpg" component={RPG} />
+          <Route exath path="/genre/shooter" component={Shooter} />
+          <Route exath path="/genre/adventure" component={Adventure} />
+          <Route exath path="/genre/puzzle" component={Puzzle} />
+          <Route exath path="/genre/racing" component={Racing} />
+          <Route exath path="/genre/sports" component={Sports} />
+        </Switch>
       </Div>
     </Router>
   );
@@ -24,9 +44,9 @@ const App = () => {
 
 export default App;
 
-const Div=styled.div`
-height: 100vh;
+const Div = styled.div`
+  height: 100vh;
   max-width: 1800px;
   margin-right: auto;
   margin-left: auto;
-`
+`;
