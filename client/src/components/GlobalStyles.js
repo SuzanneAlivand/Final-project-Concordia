@@ -15,6 +15,7 @@ export default createGlobalStyle`
   html, body {
     height: 100%;
     font-family: 'Roboto', sans-serif;
+    background-color:#05090c
   }
  
   body {
@@ -37,9 +38,9 @@ export default createGlobalStyle`
     isolation: isolate;
     --color-primary: #05090c;  
     --color-secondary:#4bacdd ; 
-    --color-tertiary: #C1C1C1;
-    --color-light: #E5E5E5;
-    --color-complimentary: #DBF2E3;  
+    --color-tertiary: #00e0c6;
+    /* --color-light: #E5E5E5; */
+    /* --color-complimentary: #DBF2E3;  */
     --color-font: #edf0f2;
   }
 

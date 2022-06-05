@@ -19,6 +19,7 @@ const Div = styled.div`
   align-items: center;
   padding: 4px 0px 0px 0px;
   border-radius: 4px;
+  transition: transform 200ms ease-in-out;
   div {
     padding: 2px 5px;
     border-radius: 4px;
@@ -26,7 +27,7 @@ const Div = styled.div`
   }
   :hover {
     background-color: #131d29;
-    font-size: 1.1rem;
+    transform: scale(1.05);
     color: var(--color-secondary);
   }
 `;

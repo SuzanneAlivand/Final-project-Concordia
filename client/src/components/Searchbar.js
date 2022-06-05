@@ -16,7 +16,7 @@ export default Searchbar;
 const Div = styled.div`
   position: relative;
   input {
-    width: 30vw;
+    width: 500px;
     padding: 10px 10px 10px 40px;
     border-radius: 15vh;
     background-color: #131d29;
