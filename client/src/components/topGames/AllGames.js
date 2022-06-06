@@ -9,7 +9,6 @@ const AllGames = () => {
   const [topGames, setTopGames] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-  console.log(page);
 
   useEffect(() => {
     fetch(`/api/games?page=${page}`)

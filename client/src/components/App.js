@@ -16,6 +16,7 @@ import Racing from "./genres/Racing.js";
 import Puzzle from "./genres/Puzzle.js";
 import Sports from "./genres/Sports.js";
 import AllGames from "./topGames/AllGames";
+import SearchResult from "./SearchResult";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
           <Route exath path="/genre/racing" component={Racing} />
           <Route exath path="/genre/sports" component={Sports} />
           <Route exath path="/games" component={AllGames} />
+          <Route exath path="/search" component={SearchResult} />
         </Switch>
       </Div>
     </Router>

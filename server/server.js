@@ -47,7 +47,9 @@ app.get("/api/best-of-the-year", bestGameYear);
 // get popular games of 2021
 app.get("/api/popular2021", popularOfYear);
 
-
+//..............................
+// search games
+app.get("/api/search", search);
 
 app.get("/", (req, res) => {
   res.send("Hi");
