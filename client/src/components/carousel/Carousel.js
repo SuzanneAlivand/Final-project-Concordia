@@ -28,8 +28,8 @@ const Carousel = ({ topGames }) => {
         }}
       />
       <Lists ref={listRef}>
-        {topGames?.map((game) => {
-          return <img src={game.background_image} />;
+        {topGames?.map((game, index) => {
+          return <img key={index} src={game.background_image} />;
         })}
       </Lists>
       <RiArrowRightSLine

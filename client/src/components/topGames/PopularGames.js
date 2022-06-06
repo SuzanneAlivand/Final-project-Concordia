@@ -16,7 +16,7 @@ const PopularGames = () => {
       .then((res) => res.json())
       .then((data) => {
         setTopGames(data.data.results);
-        setPageCount(13);
+        setPageCount(Math.ceil(data.data.count / 20));
         setLoaded(true);
       })
       .catch((error) => setError(true));

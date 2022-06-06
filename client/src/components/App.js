@@ -15,7 +15,7 @@ import Adventure from "./genres/Adventure.js";
 import Racing from "./genres/Racing.js";
 import Puzzle from "./genres/Puzzle.js";
 import Sports from "./genres/Sports.js";
-import AllGames from "./topGames/AllGames"
+import AllGames from "./topGames/AllGames";
 
 const App = () => {
   return (
@@ -48,7 +48,7 @@ export default App;
 
 const Div = styled.div`
   height: 100vh;
-  max-width: 1800px;
+  max-width: 1600px;
   margin-right: auto;
   margin-left: auto;
 `;

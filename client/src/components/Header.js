@@ -20,7 +20,7 @@ const Header = () => {
 export default Header;
 
 const Div = styled.div`
-  width: 1800;
+  width: 1600;
   height: 80px;
   background-color: var(--color-primary);
   color: var(--color-font);
@@ -28,7 +28,7 @@ const Div = styled.div`
 `;
 
 const Container = styled.div`
-  min-width: 1530px;
+  min-width: 1330px;
   display: flex;
   align-items: center;
   height: 100%;
@@ -40,7 +40,8 @@ const SearchbarDiv = styled.div`
   margin-left: 360px;
 `;
 const Profile = styled.div`
-  margin-right: 5px;
+  margin-right: 80px;
+  right: 0;
   img {
     cursor: pointer;
     width: 50px;

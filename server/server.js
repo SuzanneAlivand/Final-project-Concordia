@@ -9,6 +9,7 @@ const { getPopularGames } = require("./handlers/top250Games");
 const { bestGameYear } = require("./handlers/bestGameYear");
 const { popularOfYear } = require("./handlers/popularOfYear");
 const { allGames } = require("./handlers/allGames");
+const { search } = require("./handlers/search");
 
 const app = express();
 app.use(morgan("tiny")); // ??
@@ -45,6 +46,8 @@ app.get("/api/best-of-the-year", bestGameYear);
 //..............................
 // get popular games of 2021
 app.get("/api/popular2021", popularOfYear);
+
+
 
 app.get("/", (req, res) => {
   res.send("Hi");

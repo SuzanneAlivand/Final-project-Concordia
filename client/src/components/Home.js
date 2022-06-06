@@ -54,10 +54,10 @@ const Home = () => {
 export default Home;
 
 const Wrapper = styled.div`
-  border-width: 85px 5px 5px 5px;
+  border-width: 83px 3px 3px 3px;
   border-style: solid;
   border-color: #2c3032;
-  padding: 120px 60px 0px 60px;
+  padding: 100px 60px 0px 60px;
   height: 100vh;
   background-color: #010206;
   margin-left: 270px;
