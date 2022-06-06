@@ -11,15 +11,21 @@ const SearchProvider = ({ children }) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    let slug = searchTerm.split(" ").join("-").toLowerCase();
-    fetch(`/api/search?slug=${slug}&page=${page}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setSearchGame(data.data.results);
-        setPageCount(Math.ceil(data.data.count / 20));
-        setLoaded(true);
-      })
-      .catch((error) => setError(true));
+    const delayDebounceFn = setTimeout(() => {
+      let slug = searchTerm.split(" ").join("-").toLowerCase();
+      if (slug) {
+        fetch(`/api/search?slug=${slug}&page=${page}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setSearchGame(data.data.results);
+            setPageCount(Math.ceil(data.data.count / 20));
+            setLoaded(true);
+            console.log(data.data.next);
+          })
+          .catch((error) => setError(true));
+      }
+    }, 500);
+    return () => clearTimeout(delayDebounceFn);
   }, [searchTerm]);
 
   return (

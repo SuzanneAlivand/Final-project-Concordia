@@ -14,8 +14,8 @@ const SearchResult = () => {
       {!error ? (
         loaded ? (
           <Wrapper>
-            {searchGame?.map((game) => {
-              return <img src={game.background_image} />;
+            {searchGame?.map((game, index) => {
+              return <img key={index} src={game.background_image} />;
             })}
             <Pagination setPage={setPage} pageCount={pageCount} />
           </Wrapper>

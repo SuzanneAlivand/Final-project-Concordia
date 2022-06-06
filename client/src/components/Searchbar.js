@@ -5,18 +5,7 @@ import { useHistory } from "react-router-dom";
 import { SearchContext } from "./context/SearchContext";
 
 const Searchbar = () => {
-  const {
-    searchTerm,
-    setSearchTerm,
-    searchGame,
-    setSearchGame,
-    setError,
-    setPageCount,
-    pageCount,
-    page,
-    setPage,
-    loaded,
-  } = useContext(SearchContext);
+  const { searchTerm, setSearchTerm, searchGame } = useContext(SearchContext);
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
