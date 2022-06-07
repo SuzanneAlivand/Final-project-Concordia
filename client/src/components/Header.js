@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Searchbar from "./Searchbar";
 import avatar from "../assets/avatar.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiUserPlus } from "react-icons/fi";
 import { RiLoginBoxLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
@@ -9,10 +9,12 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = () => {
-  const { loginWithRedirect, logout, user, isAuthenticated,isLoading } = useAuth0();
+  const { loginWithRedirect, logout, user, isAuthenticated, isLoading } =
+    useAuth0();
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
+  const [error, setError] = useState(false);
 
-// Auth0 functions
+  // Auth0 functions
   const handleClick = () => {
     setToggleProfileMenu(!toggleProfileMenu);
   };
@@ -23,8 +25,28 @@ const Header = () => {
     logout();
   };
   const handleSignUp = () => {
-    
+    loginWithRedirect();
   };
+  //.................
+  // add user to mongodb
+  useEffect(() => {
+    if (user) {
+      fetch("/api/new-user", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ user }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          setError(true);
+        });
+    }
+  }, [user]);
 
   console.log(user);
   return (
@@ -104,6 +126,17 @@ const Profile = styled.button`
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    animation-name: example;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    @keyframes example {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   }
 `;
 const ProfileMenu = styled.div`

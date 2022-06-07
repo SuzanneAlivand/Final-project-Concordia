@@ -19,7 +19,7 @@ const Div = styled.div`
   height: 100vh;
   padding: 50px;
   img {
-    max-width: 4vw;
+    max-width: 3vw;
     height: auto;
   }
 `;

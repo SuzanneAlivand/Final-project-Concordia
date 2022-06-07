@@ -10,6 +10,7 @@ const { bestGameYear } = require("./handlers/bestGameYear");
 const { popularOfYear } = require("./handlers/popularOfYear");
 const { allGames } = require("./handlers/allGames");
 const { search } = require("./handlers/search");
+const { addUser } = require("./handlers/addUser");
 
 const app = express();
 app.use(morgan("tiny")); // ??
@@ -50,6 +51,10 @@ app.get("/api/popular2021", popularOfYear);
 //..............................
 // search games
 app.get("/api/search", search);
+
+//..............................
+// search games
+app.post("/api/new-user", addUser);
 
 app.get("/", (req, res) => {
   res.send("Hi");
