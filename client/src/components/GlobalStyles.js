@@ -39,8 +39,6 @@ export default createGlobalStyle`
     --color-primary: #05090c;  
     --color-secondary:#4bacdd ; 
     --color-tertiary: #00e0c6;
-    /* --color-light: #E5E5E5; */
-    /* --color-complimentary: #DBF2E3;  */
     --color-font: #edf0f2;
   }
 

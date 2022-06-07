@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import Pagination from "../pagination/Pagination";
 import SpinnerTwo from "../spinner/SpinnerTwo";
+import Rating from "../gameParameters/Rating";
+import Metacritic from "../gameParameters/Metacritic";
+import Platforms from "../gameParameters/Platforms";
+import Genres from "../gameParameters/Genres";
 
 const BestYearGames = () => {
   const [error, setError] = useState(false);
@@ -22,12 +26,37 @@ const BestYearGames = () => {
       .catch((error) => setError(true));
   }, [page]);
   return (
-    <Wrapper>
+    <Wrapper id="main-wrapper">
       {loaded ? (
         <>
-          {topGames?.map((game) => {
-            return <img src={game.background_image} />;
-          })}
+          <Games>
+            {topGames?.map((game) => {
+              return (
+                <GameDiv>
+                  <GameImage>
+                    <img src={game.background_image} />
+                    <Info>
+                      <h4>{game.name}</h4>
+                      <Rating value={Number(game.rating)} />
+                      {game.metacritic > 0 ? (
+                        <Metacritic metacritic={game.metacritic} />
+                      ) : (
+                        <p>
+                          Metacritic: <span>N/A</span>
+                        </p>
+                      )}
+                      <p>
+                        Playtime:{" "}
+                        {game.playtime > 0 ? game.playtime + " h" : "N/A"}
+                      </p>
+                    </Info>
+                  </GameImage>
+                  <Platforms platforms={game.parent_platforms} />
+                  <Genres geners={game.genres} />
+                </GameDiv>
+              );
+            })}
+          </Games>
           <Pagination setPage={setPage} pageCount={pageCount} />
         </>
       ) : (
@@ -43,7 +72,7 @@ const Wrapper = styled.div`
   color: var(--color-font);
   padding: 120px 60px 0px 60px;
   height: 100vh;
-  background-color: #010206;
+  background-color: #131d29;
   margin-left: 270px;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -52,7 +81,40 @@ const Wrapper = styled.div`
     display: none;
   }
   img {
-    max-width: 170px;
+    max-width: 260px;
+    min-width: 260px;
     max-height: 140px;
+    min-height: 120px;
+    border-radius: 6px;
+    margin-right: 20px;
+  }
+`;
+const Games = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+`;
+const GameDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 500px;
+  height: 230px;
+  background-color: #010206;
+  border-radius: 6px;
+  margin-bottom: 40px;
+  padding: 15px;
+`;
+const GameImage = styled.div`
+  display: flex;
+  padding-bottom: 15px;
+`;
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h4 {
+    color: var(--color-secondary);
   }
 `;

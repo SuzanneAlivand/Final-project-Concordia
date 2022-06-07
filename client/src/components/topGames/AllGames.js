@@ -21,7 +21,7 @@ const AllGames = () => {
       .catch((error) => setError(true));
   }, [page]);
   return (
-    <Wrapper>
+    <Wrapper id="main-wrapper">
       {loaded ? (
         <>
           {topGames?.map((game) => {
