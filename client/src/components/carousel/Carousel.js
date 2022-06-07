@@ -8,14 +8,15 @@ const Carousel = ({ topGames }) => {
   const listRef = useRef();
   const [slideNumber, setSlideNumber] = useState(0);
   const handleClick = (direction) => {
-    let distance = listRef.current.getBoundingClientRect().x - 370;
+    let distance = listRef.current.getBoundingClientRect().x - 333;
+    console.log(distance);
     if (direction === "left" && slideNumber > 0) {
       setSlideNumber(slideNumber - 1);
-      listRef.current.style.transform = `translateX(${160 + distance}px)`;
+      listRef.current.style.transform = `translateX(${320 + distance}px)`;
     }
-    if (direction === "right" && slideNumber < 12) {
+    if (direction === "right" && slideNumber < 7) {
       setSlideNumber(slideNumber + 1);
-      listRef.current.style.transform = `translateX(${-160 + distance}px)`;
+      listRef.current.style.transform = `translateX(${-320 + distance}px)`;
     }
   };
   return (
@@ -85,8 +86,8 @@ const Lists = styled.div`
   transform: translateX(0px);
   transition: all 1s ease;
   img {
-    max-width: 155px;
-    max-height: 120px;
+    max-width: 150px;
+    max-height: 110px;
     margin-right: 10px;
     cursor: pointer;
     transition: all 200ms ease-in-out;

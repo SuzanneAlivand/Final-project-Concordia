@@ -3,11 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import backgroundOne from "../assets/background.jpg";
 import Carousel from "./carousel/Carousel";
 import Spinner from "./spinner/spinner";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = () => {
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [topGames, setTopGames] = useState([]);
+  const { loginWithRedirect, user, isLoading } = useAuth0();
 
   const page = Math.floor(Math.random() * 13);
   // fetching some of top games
@@ -25,6 +27,9 @@ const Home = () => {
     }
   }, []);
 
+  const handleLogIn = () => {
+    loginWithRedirect();
+  };
   return (
     <Wrapper>
       {topGames.length > 0 ? (
@@ -40,7 +45,11 @@ const Home = () => {
               decide what to play next. You can also mark any game as
               in-progress, completed or abandoned.
             </p>
-            <button>Get started</button>
+            {user ? (
+              <button>Enjoy Catlog ^__^</button>
+            ) : (
+              <button onClick={handleLogIn}>Get started</button>
+            )}
           </WelcomeDiv>
           <Carousel topGames={topGames} />
         </>
