@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import axel from "../../assets/axel.gif";
+import mario from "../../assets/mario.gif";
 const Spinner = () => {
   return (
     <Div>
-      <img src={axel} />
+      <img src={mario} />
     </Div>
   );
 };

@@ -11,11 +11,14 @@ const Spinner = () => {
 export default Spinner;
 
 const Div = styled.div`
-  padding-top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: hsl(258deg, 100%, 50%);
-  height: 100%;
-  width: 100%;
+  color: var(--color-font);
+  height: 100vh;
+  padding: 50px;
+  img {
+    width: 15vw;
+    height: auto;
+  }
 `;

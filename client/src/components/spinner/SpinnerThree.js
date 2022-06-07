@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import axel from "../../assets/axel.gif";
+import undertale from "../../assets/undertale.gif";
 const Spinner = () => {
   return (
     <Div>
-      <img src={axel} />
+      <img src={undertale} />
     </Div>
   );
 };
@@ -19,7 +19,7 @@ const Div = styled.div`
   height: 100vh;
   padding: 50px;
   img {
-    width: 15vw;
+    max-width: 4vw;
     height: auto;
   }
 `;

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import axel from "../../assets/axel.gif";
+import blaze from "../../assets/blaze.gif";
 const Spinner = () => {
   return (
     <Div>
-      <img src={axel} />
+      <img src={blaze} />
     </Div>
   );
 };
@@ -19,7 +19,7 @@ const Div = styled.div`
   height: 100vh;
   padding: 50px;
   img {
-    width: 15vw;
+    width: 5vw;
     height: auto;
   }
 `;

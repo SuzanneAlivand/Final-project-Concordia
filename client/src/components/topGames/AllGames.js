@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import Pagination from "../pagination/Pagination";
-import Spinner from "../spinner/spinner";
+import SpinnerOne from "../spinner/SpinnerOne";
 
 const AllGames = () => {
   const [error, setError] = useState(false);
@@ -21,18 +21,18 @@ const AllGames = () => {
       .catch((error) => setError(true));
   }, [page]);
   return (
-    <>
+    <Wrapper>
       {loaded ? (
-        <Wrapper>
+        <>
           {topGames?.map((game) => {
             return <img src={game.background_image} />;
           })}
           <Pagination setPage={setPage} pageCount={pageCount} />
-        </Wrapper>
+        </>
       ) : (
-        <Spinner />
+        <SpinnerOne />
       )}
-    </>
+    </Wrapper>
   );
 };
 
