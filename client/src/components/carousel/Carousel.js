@@ -90,6 +90,7 @@ const Lists = styled.div`
     max-height: 110px;
     margin-right: 10px;
     cursor: pointer;
+    border-radius:3px;
     transition: all 200ms ease-in-out;
     :hover {
       transform: scale(1.2);

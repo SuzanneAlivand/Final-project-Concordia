@@ -6,6 +6,7 @@ import Rating from "../gameParameters/Rating";
 import Metacritic from "../gameParameters/Metacritic";
 import Platforms from "../gameParameters/Platforms";
 import Genres from "../gameParameters/Genres";
+import LibraryMenu from "../LibraryMenu";
 
 const BestYearGames = () => {
   const [error, setError] = useState(false);
@@ -42,7 +43,7 @@ const BestYearGames = () => {
                         <Metacritic metacritic={game.metacritic} />
                       ) : (
                         <p>
-                          Metacritic: <span>N/A</span>
+                          Metascore: <span>N/A</span>
                         </p>
                       )}
                       <p>
@@ -51,8 +52,13 @@ const BestYearGames = () => {
                       </p>
                     </Info>
                   </GameImage>
-                  <Platforms platforms={game.parent_platforms} />
-                  <Genres geners={game.genres} />
+                  <LibraryDiv>
+                    <PlatformsDiv>
+                      <Platforms platforms={game.parent_platforms} />
+                      <Genres geners={game.genres} />
+                    </PlatformsDiv>
+                    <LibraryMenu />
+                  </LibraryDiv>
                 </GameDiv>
               );
             })}
@@ -118,3 +124,13 @@ const Info = styled.div`
     color: var(--color-secondary);
   }
 `;
+const PlatformsDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+const LibraryDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
