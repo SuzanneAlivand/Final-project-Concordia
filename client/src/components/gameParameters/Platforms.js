@@ -9,45 +9,45 @@ import { MdPhoneAndroid } from "react-icons/md";
 const Platforms = ({ platforms }) => {
   return (
     <Div>
-      {platforms.map((item) => {
+      {platforms.map((item, index) => {
         if (item.platform.name === "PC") {
           return (
-            <span>
+            <span key={index}>
               <BsWindows />
             </span>
           );
         }
         if (item.platform.name === "PlayStation") {
           return (
-            <span>
+            <span key={index}>
               <FaPlaystation />
             </span>
           );
         }
         if (item.platform.name === "Xbox") {
           return (
-            <span>
+            <span key={index}>
               <FaXbox />
             </span>
           );
         }
         if (item.platform.name === "Android") {
           return (
-            <span>
+            <span key={index}>
               <ImAndroid />
             </span>
           );
         }
         if (item.platform.name === "iOS") {
           return (
-            <span>
+            <span key={index}>
               <MdPhoneAndroid />
             </span>
           );
         }
         if (item.platform.name === "Nintendo") {
           return (
-            <span>
+            <span key={index}>
               <SiNintendo />
             </span>
           );

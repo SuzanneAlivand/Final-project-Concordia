@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Searchbar from "./Searchbar";
 import avatar from "../assets/avatar.png";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiUserPlus } from "react-icons/fi";
 import { RiLoginBoxLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
@@ -13,6 +13,7 @@ const Header = () => {
     useAuth0();
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
   const [error, setError] = useState(false);
+  const menuRef = useRef(null);
 
   // Auth0 functions
   const handleClick = () => {
@@ -39,16 +40,28 @@ const Header = () => {
         body: JSON.stringify({ user }),
       })
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
+        .then((data) => {})
         .catch((error) => {
           setError(true);
         });
     }
   }, [user]);
 
-  console.log(user);
+  // dropdown being closed when clicking other part of the page
+  useEffect(() => {
+    const pageClickEvent = (e) => {
+      if (menuRef.current !== null && !menuRef.current.contains(e.target)) {
+        setToggleProfileMenu(!toggleProfileMenu);
+      }
+    };
+    if (toggleProfileMenu) {
+      window.addEventListener("click", pageClickEvent);
+    }
+    return () => {
+      window.removeEventListener("click", pageClickEvent);
+    };
+  }, [toggleProfileMenu]);
+
   return (
     <Div>
       <Container>
@@ -56,15 +69,15 @@ const Header = () => {
           <Searchbar />
         </SearchbarDiv>
         <ProfileMenu>
-          <Profile onClick={handleClick}>
+          <Profile onClick={handleClick} ref={menuRef}>
             {user ? (
               <img src={user.picture} alt="profile" />
             ) : (
               <img src={avatar} alt="profile" />
             )}
           </Profile>
-          {toggleProfileMenu && user && (
-            <UserMenuWrapper id="UserMenuWrapper">
+          {user && (
+            <UserMenuWrapper className={toggleProfileMenu ? "active" : ""}>
               <MenuItem>
                 <CgProfile style={{ marginRight: "8px" }} />
                 <p>Profile</p>
@@ -75,8 +88,8 @@ const Header = () => {
               </MenuItem>
             </UserMenuWrapper>
           )}
-          {toggleProfileMenu && !user && (
-            <UserMenuWrapper id="UserMenuWrapper">
+          {!user && (
+            <UserMenuWrapper className={toggleProfileMenu ? "active" : ""}>
               <MenuItem onClick={handleLogIn}>
                 <RiLoginBoxLine style={{ marginRight: "8px" }} />
                 <p>Log In</p>
@@ -96,6 +109,7 @@ const Header = () => {
 export default Header;
 
 const Div = styled.div`
+  z-index: 9;
   width: 1600;
   height: 80px;
   background-color: var(--color-primary);
@@ -141,12 +155,6 @@ const Profile = styled.button`
 `;
 const ProfileMenu = styled.div`
   position: relative;
-  :hover {
-    #UserMenuWrapper {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-  }
 `;
 const UserMenuWrapper = styled.div`
   position: absolute;
@@ -160,8 +168,15 @@ const UserMenuWrapper = styled.div`
   border-radius: 4px;
   padding: 10px 5px;
   opacity: 0;
+  visibility: hidden;
   transform: translateY(-10px);
-  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  transition: opacity 250ms ease-in-out, transform 250ms ease-in-out,
+    visibility 250ms;
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+  }
 `;
 const MenuItem = styled.div`
   display: flex;

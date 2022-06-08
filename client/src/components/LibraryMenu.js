@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { HiPlus } from "react-icons/hi";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -10,7 +10,9 @@ import { VscLibrary } from "react-icons/vsc";
 const LibraryMenu = () => {
   const [toggleMenu, setToggleMenue] = useState(false);
   const { user, loginWithRedirect } = useAuth0();
+  const menuRef = useRef(null);
 
+  // by click on + open the menu if user is logged in
   const handleClick = () => {
     if (user) {
       setToggleMenue(!toggleMenu);
@@ -18,14 +20,28 @@ const LibraryMenu = () => {
       loginWithRedirect();
     }
   };
+  // click on other part of the page shoud closes th menu
+  useEffect(() => {
+    const pageClickEvent = (e) => {
+      if (menuRef.current !== null && !menuRef.current.contains(e.target)) {
+        setToggleMenue(!toggleMenu);
+      }
+    };
+    if (toggleMenu) {
+      window.addEventListener("click", pageClickEvent);
+    }
+    return () => {
+      window.removeEventListener("click", pageClickEvent);
+    };
+  }, [toggleMenu]);
 
   return (
     <Div>
-      <button onClick={handleClick}>
+      <button ref={menuRef} onClick={handleClick}>
         <HiPlus size="20px" />
       </button>
-      {toggleMenu && user && (
-        <Menu>
+      {user && (
+        <Menu className={toggleMenu ? "active" : ""}>
           <MenuItem>
             <VscLibrary
               style={{ marginRight: "6px", color: "var(--color-secondary)" }}
@@ -55,7 +71,7 @@ const LibraryMenu = () => {
 export default LibraryMenu;
 
 const Div = styled.div`
-  position:  relative;
+  position: relative;
   button {
     border: none;
     margin-right: 10px;
@@ -70,7 +86,6 @@ const Div = styled.div`
 `;
 const Menu = styled.div`
   position: absolute;
-  /* position: sticky; */
   border-radius: 6px;
   height: 140px;
   width: 135px;
@@ -80,14 +95,24 @@ const Menu = styled.div`
   margin-top: 5px;
   background-color: #010206;
   padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: opacity 250ms ease-in-out, transform 250ms ease-in-out,
+    visibility 250ms;
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+  }
 `;
 const MenuItem = styled.div`
-  /* position: sticky; */
   display: flex;
   align-items: center;
   padding: 2px 4px;
   border-radius: 2px;
   :hover {
     background-color: #131d29;
+    cursor: pointer;
   }
 `;

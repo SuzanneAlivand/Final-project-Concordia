@@ -98,6 +98,7 @@ export default Sidebar;
 
 // styling the sidebar
 const Div = styled.div`
+  z-index: 100;
   width: 270px;
   height: 100vh;
   background-color: var(--color-primary);

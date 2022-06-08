@@ -5,7 +5,7 @@ const Genres = ({ geners }) => {
     <div>
       <span style={{ color: "var(--color-secondary)" }}>Genres: </span>
       {geners.map((genre) => {
-        return <span>{genre.name + ". "}</span>;
+        return <span key={genre.name}>{genre.name + ". "}</span>;
       })}
     </div>
   );

@@ -14,7 +14,6 @@ const BestYearGames = () => {
   const [topGames, setTopGames] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-  console.log(page);
 
   useEffect(() => {
     fetch(`/api/best-of-the-year?page=${page}`)
@@ -33,7 +32,7 @@ const BestYearGames = () => {
           <Games>
             {topGames?.map((game) => {
               return (
-                <GameDiv>
+                <GameDiv key={game.id}>
                   <GameImage>
                     <img src={game.background_image} />
                     <Info>
@@ -133,4 +132,3 @@ const LibraryDiv = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
