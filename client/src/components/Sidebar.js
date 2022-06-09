@@ -11,15 +11,18 @@ import { CgSpinner } from "react-icons/cg";
 import { TiTickOutline } from "react-icons/ti";
 import action from "../assets/action.png";
 import strategy from "../assets/strategy.png";
-import rpg from "../assets/action.png";
-import shooter from "../assets/rpg.png";
+import rpg from "../assets/rpg.png";
+import shooter from "../assets/shooter.png";
 import adventure from "../assets/adventure.png";
 import puzzle from "../assets/puzzle.png";
 import racing from "../assets/racing.png";
 import sports from "../assets/sports.png";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Sidebar = () => {
+  const { user, loginWithRedirect } = useAuth0();
+
   return (
     <Div>
       <LogoDiv>
@@ -58,9 +61,15 @@ const Sidebar = () => {
         <Topic>
           <h3>Library</h3>
           <LogoTopic text="Backlog" Icon={VscLibrary} />
-          <LogoTopic text="In progress" Icon={CgSpinner} />
-          <LogoTopic text="Completed" Icon={TiTickOutline} />
-          <LogoTopic text="Abandoned" Icon={FiArchive} />
+          <Link to="/inProgress">
+            <LogoTopic text="In progress" Icon={CgSpinner} />
+          </Link>
+          <Link to="/completed">
+            <LogoTopic text="Completed" Icon={TiTickOutline} />
+          </Link>
+          <Link to="/abandoned">
+            <LogoTopic text="Abandoned" Icon={FiArchive} />
+          </Link>
         </Topic>
         <Topic style={{ marginBottom: "120px" }}>
           <h3>Genres</h3>

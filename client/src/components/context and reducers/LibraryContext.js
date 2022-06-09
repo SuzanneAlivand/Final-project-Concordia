@@ -21,10 +21,10 @@ export const LibraryProvider = ({ children }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setBacklog(data.backlog);
-        setInProgress(data.newInProgressList);
-        setCompleted(data.newCompletedList);
-        setAbandoned(data.newAbandonedList);
+        setBacklog(data.data.backlog);
+        setInProgress(data.data.newInProgressList);
+        setCompleted(data.data.newCompletedList);
+        setAbandoned(data.data.newAbandonedList);
       })
       .catch((error) => {
         console.log(error);
@@ -42,10 +42,10 @@ export const LibraryProvider = ({ children }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setBacklog(data.newBacklogList);
-        setInProgress(data.newInProgressList);
-        setCompleted(data.completed);
-        setAbandoned(data.newAbandonedList);
+        setBacklog(data.data.newBacklogList);
+        setInProgress(data.data.newInProgressList);
+        setCompleted(data.data.completed);
+        setAbandoned(data.data.newAbandonedList);
       })
       .catch((error) => {
         console.log(error);
@@ -63,10 +63,10 @@ export const LibraryProvider = ({ children }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setBacklog(data.newBacklogList);
-        setInProgress(data.inProgress);
-        setCompleted(data.newCompletedList);
-        setAbandoned(data.newAbandonedList);
+        setBacklog(data.data.newBacklogList);
+        setInProgress(data.data.inProgress);
+        setCompleted(data.data.newCompletedList);
+        setAbandoned(data.data.newAbandonedList);
       })
       .catch((error) => {
         console.log(error);
@@ -84,16 +84,16 @@ export const LibraryProvider = ({ children }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setBacklog(data.newBacklogList);
-        setInProgress(data.newInProgressList);
-        setCompleted(data.newCompletedList);
-        setAbandoned(data.abandoned);
+        setBacklog(data.data.newBacklogList);
+        setInProgress(data.data.newInProgressList);
+        setCompleted(data.data.newCompletedList);
+        setAbandoned(data.data.abandoned);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  
+
   return (
     <LibraryContext.Provider
       value={{
@@ -104,8 +104,11 @@ export const LibraryProvider = ({ children }) => {
         backlog,
         setBacklog,
         inProgress,
+        setInProgress,
         completed,
+        setCompleted,
         abondoned,
+        setAbandoned,
       }}
     >
       {children}
