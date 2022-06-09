@@ -45,7 +45,6 @@ const addInProgress = async (req, res) => {
         },
       }
     );
-    console.log(collections);
     res.status(201).json({ status: 201, data: collections });
     client.close();
   } catch (err) {

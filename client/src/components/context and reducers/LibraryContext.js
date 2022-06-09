@@ -93,7 +93,7 @@ export const LibraryProvider = ({ children }) => {
         console.log(error);
       });
   };
-
+  
   return (
     <LibraryContext.Provider
       value={{
@@ -101,6 +101,11 @@ export const LibraryProvider = ({ children }) => {
         handleCompleted,
         handleInProgress,
         handleAbandoned,
+        backlog,
+        setBacklog,
+        inProgress,
+        completed,
+        abondoned,
       }}
     >
       {children}

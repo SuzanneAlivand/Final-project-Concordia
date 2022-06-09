@@ -3,11 +3,11 @@ const path = require("path");
 require("dotenv").config({ path: "./.env" });
 const { RapidAPI_Key } = process.env;
 
-const allGames = async (req, res) => {
-  page = req.query.page || 1;
+const getGameById = async (req, res) => {
+  id = req.query.id;
   const options = {
     method: "GET",
-    uri: `https://rawg.io/api/games?page=${page}&page_size=20&filter=true&comments=true&key=${RapidAPI_Key}`,
+    uri: `https://rawg.io/api/games/${id}?key=${RapidAPI_Key}`,
     headers: {
       useQueryString: true,
     },
@@ -27,4 +27,4 @@ const allGames = async (req, res) => {
     });
   }
 };
-module.exports = { allGames };
+module.exports = { getGameById };

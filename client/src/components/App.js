@@ -17,6 +17,10 @@ import Puzzle from "./genres/Puzzle.js";
 import Sports from "./genres/Sports.js";
 import AllGames from "./topGames/AllGames";
 import SearchResult from "./SearchResult";
+import Abandoned from "./library/Abandoned";
+import Completed from "./library/Completed";
+import InProgress from "./library/InProgress";
+import Backlog from "./library/Backlog";
 
 const App = () => {
   return (
@@ -40,6 +44,10 @@ const App = () => {
           <Route exath path="/genre/sports" component={Sports} />
           <Route exath path="/games" component={AllGames} />
           <Route exath path="/search" component={SearchResult} />
+          <Route exath path="/backlog" component={Backlog} />
+          <Route exath path="/inProgress" component={InProgress} />
+          <Route exath path="/completed" component={Completed} />
+          <Route exath path="/abandoned" component={Abandoned} />
         </Switch>
       </Div>
     </Router>

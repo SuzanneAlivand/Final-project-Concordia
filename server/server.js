@@ -15,6 +15,8 @@ const { addBacklog } = require("./handlers/addBacklog");
 const { addCompleted } = require("./handlers/addCompleted");
 const { addAbandoned } = require("./handlers/addAbandoned");
 const { addInProgress } = require("./handlers/addInProgress");
+const { getGameById } = require("./handlers/getGameById");
+const { getBacklog } = require("./handlers/getBacklog");
 
 const app = express();
 app.use(morgan("tiny")); // ??
@@ -75,6 +77,16 @@ app.post("/api/add-inProgress", addInProgress);
 //..............................
 // add a game to abandoned list
 app.post("/api/add-abandoned", addAbandoned);
+
+//..............................
+// get a game by its id
+app.get("/api/game", getGameById);
+
+//..............................
+// get backlog list of a specific user
+app.get("/api/backlog", getBacklog);
+
+
 
 app.get("/", (req, res) => {
   res.send("Hi");
