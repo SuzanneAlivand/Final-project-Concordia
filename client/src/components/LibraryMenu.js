@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { HiPlus } from "react-icons/hi";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -6,12 +6,15 @@ import { GiSpiderWeb } from "react-icons/gi";
 import { GiRetroController } from "react-icons/gi";
 import { GiMedallist } from "react-icons/gi";
 import { VscLibrary } from "react-icons/vsc";
+import { LibraryContext } from "./context and reducers/LibraryContext";
 
-const LibraryMenu = () => {
+const LibraryMenu = ({ gameId }) => {
   const [toggleMenu, setToggleMenue] = useState(false);
   const { user, loginWithRedirect } = useAuth0();
   const menuRef = useRef(null);
-
+  const { handleBacklog, handleCompleted, handleInProgress, handleAbandoned } =
+    useContext(LibraryContext);
+  //......................
   // by click on + open the menu if user is logged in
   const handleClick = () => {
     if (user) {
@@ -20,6 +23,7 @@ const LibraryMenu = () => {
       loginWithRedirect();
     }
   };
+  //......................
   // click on other part of the page shoud closes th menu
   useEffect(() => {
     const pageClickEvent = (e) => {
@@ -42,23 +46,39 @@ const LibraryMenu = () => {
       </button>
       {user && (
         <Menu className={toggleMenu ? "active" : ""}>
-          <MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleBacklog(gameId);
+            }}
+          >
             <VscLibrary
               style={{ marginRight: "6px", color: "var(--color-secondary)" }}
             />
             <p>Backlog</p>
           </MenuItem>
-          <MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleInProgress(gameId);
+            }}
+          >
             <GiRetroController
               style={{ marginRight: "6px", color: "#ff9900" }}
             />
             <p>In Progress</p>
           </MenuItem>
-          <MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleCompleted(gameId);
+            }}
+          >
             <GiMedallist style={{ marginRight: "6px", color: "#00ff00" }} />
             <p>Completed</p>
           </MenuItem>
-          <MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleAbandoned(gameId);
+            }}
+          >
             <GiSpiderWeb style={{ marginRight: "6px", color: "#ff0000" }} />
             <p>Abandoned</p>
           </MenuItem>

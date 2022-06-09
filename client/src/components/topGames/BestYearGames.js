@@ -56,7 +56,7 @@ const BestYearGames = () => {
                       <Platforms platforms={game.parent_platforms} />
                       <Genres geners={game.genres} />
                     </PlatformsDiv>
-                    <LibraryMenu />
+                    <LibraryMenu gameId={game.id} />
                   </LibraryDiv>
                 </GameDiv>
               );

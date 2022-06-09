@@ -11,6 +11,10 @@ const { popularOfYear } = require("./handlers/popularOfYear");
 const { allGames } = require("./handlers/allGames");
 const { search } = require("./handlers/search");
 const { addUser } = require("./handlers/addUser");
+const { addBacklog } = require("./handlers/addBacklog");
+const { addCompleted } = require("./handlers/addCompleted");
+const { addAbandoned } = require("./handlers/addAbandoned");
+const { addInProgress } = require("./handlers/addInProgress");
 
 const app = express();
 app.use(morgan("tiny")); // ??
@@ -55,6 +59,22 @@ app.get("/api/search", search);
 //..............................
 // search games
 app.post("/api/new-user", addUser);
+
+//..............................
+// add a game to backlog list
+app.post("/api/add-backlog", addBacklog);
+
+//..............................
+// add a game to completed list
+app.post("/api/add-completed", addCompleted);
+
+//..............................
+// add a game to in progress list
+app.post("/api/add-inProgress", addInProgress);
+
+//..............................
+// add a game to abandoned list
+app.post("/api/add-abandoned", addAbandoned);
 
 app.get("/", (req, res) => {
   res.send("Hi");

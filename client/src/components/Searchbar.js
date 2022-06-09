@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { BiSearchAlt } from "react-icons/bi";
 import { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { SearchContext } from "./context/SearchContext";
+import { SearchContext } from "./context and reducers/SearchContext";
 
 const Searchbar = () => {
   const { searchTerm, setSearchTerm, searchGame } = useContext(SearchContext);

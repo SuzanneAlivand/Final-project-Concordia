@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useContext } from "react";
-import { SearchContext } from "./context/SearchContext";
+import { SearchContext } from "./context and reducers/SearchContext";
 import Pagination from "./pagination/Pagination";
 import Error from "./Error";
 import Spinner from "./spinner/spinner";

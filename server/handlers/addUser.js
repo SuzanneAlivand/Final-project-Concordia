@@ -22,7 +22,14 @@ const addUser = async (req, res) => {
         .status(200)
         .json({ status: 200, message: "This user already exist!" });
     } else {
-      const NewUser = Object.assign({ _id: uuidv4() }, user);
+      const NewUser = Object.assign(
+        { _id: uuidv4() },
+        user,
+        { backlog: [] },
+        { completed: [] },
+        { abandoned: [] },
+        { inProgress: [] }
+      );
       await db.collection("users").insertOne(NewUser);
       res.status(201).json({ status: 201, message: "New user added!" });
       client.close();
