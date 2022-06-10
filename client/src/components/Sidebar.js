@@ -17,12 +17,10 @@ import adventure from "../assets/adventure.png";
 import puzzle from "../assets/puzzle.png";
 import racing from "../assets/racing.png";
 import sports from "../assets/sports.png";
-import { Link, Redirect } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Link, Redirect, useHistory } from "react-router-dom";
+
 
 const Sidebar = () => {
-  const { user, loginWithRedirect } = useAuth0();
-
   return (
     <Div>
       <LogoDiv>
@@ -60,7 +58,9 @@ const Sidebar = () => {
         </Topic>
         <Topic>
           <h3>Library</h3>
-          <LogoTopic text="Backlog" Icon={VscLibrary} />
+          <Link to="/backlog">
+            <LogoTopic text="Backlog" Icon={VscLibrary}/>
+          </Link>
           <Link to="/inProgress">
             <LogoTopic text="In progress" Icon={CgSpinner} />
           </Link>

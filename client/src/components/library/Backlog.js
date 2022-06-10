@@ -10,12 +10,12 @@ import Genres from "../gameParameters/Genres";
 import SpinnerOne from "../spinner/SpinnerOne";
 
 const Backlog = () => {
-  const { user } = useAuth0();
+  const { user, loginWithRedirect } = useAuth0();
   const { backlog, setBacklog } = useContext(LibraryContext);
   const [backlogGames, setBacklogGames] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
-  // get list of backlogs from backend
+  // get a list of backlog games'IDs from backend
   useEffect(() => {
     if (user) {
       const headers = { email: user.email };
@@ -28,7 +28,6 @@ const Backlog = () => {
         .catch((error) => console.log(error));
     }
   }, [user]);
-  
 
   // geting all the games of backlog from their IDs
   useEffect(() => {
@@ -42,12 +41,10 @@ const Backlog = () => {
             .then((res) => res.json())
             .then((data) => {
               fetchTracker++;
-              console.log("fetch tracker is " + fetchTracker);
               if (!gamesInBacklog.includes(data.data)) {
                 gamesInBacklog.push(data.data);
               }
               if (fetchTracker === backlogLength) {
-                console.log("done fetching!");
                 setLoaded(true);
                 setBacklogGames(gamesInBacklog);
               }
@@ -61,51 +58,72 @@ const Backlog = () => {
     }
   }, [backlog]);
 
-  // console.log(backlogIdList);
+  if (!user) {
+    return (
+      <Wrapper style={{ textAlign: "center" }}>
+        <h3>You need to log in order to access this page!</h3>
+        <Button
+          onClick={() => {
+            loginWithRedirect();
+          }}
+        >
+          Click here
+        </Button>
+      </Wrapper>
+    );
+  }
+  
+  if (loaded && backlogGames.length === 0) {
+    return (
+      <Wrapper style={{ textAlign: "center" }}>
+        <h3>Your backlog is empty!</h3>
+      </Wrapper>
+    );
+  }
 
   return (
-    <Wrapper id="main-wrapper">
-      {loaded ? (
-        <>
-          <Games>
-            {backlogGames.map((game, index) => {
-              return (
-                <GameDiv key={`${index}backlog`}>
-                  <GameImage>
-                    <img src={game.background_image} />
-                    <Info>
-                      <h4>{game.name}</h4>
-                      <Rating value={Number(game.rating)} />
-                      {game.metacritic > 0 ? (
-                        <Metacritic metacritic={game.metacritic} />
-                      ) : (
-                        <p>
-                          Metascore: <span>N/A</span>
-                        </p>
-                      )}
-                      <p>
-                        Playtime:{" "}
-                        {game.playtime > 0 ? game.playtime + " h" : "N/A"}
-                      </p>
-                    </Info>
-                  </GameImage>
-                  <LibraryDiv>
-                    <PlatformsDiv>
-                      <Platforms platforms={game.parent_platforms} />
-                      <Genres geners={game.genres} />
-                    </PlatformsDiv>
-                    <LibraryMenu gameId={game.id} />
-                  </LibraryDiv>
-                </GameDiv>
-              );
-            })}
-          </Games>
-          {/* <Pagination setPage={setPage} pageCount={pageCount} /> */}
-        </>
-      ) : (
-        <SpinnerOne />
-      )}
-    </Wrapper>
+        <Wrapper id="main-wrapper">
+          {loaded && backlogGames.length > 0 ? (
+            <>
+              <Games>
+                {backlogGames.map((game, index) => {
+                  return (
+                    <GameDiv key={`${index}backlog`}>
+                      <GameImage>
+                        <Image src={game.background_image} />
+                        <Info>
+                          <h4>{game.name}</h4>
+                          <Rating value={Number(game.rating)} />
+                          {game.metacritic > 0 ? (
+                            <Metacritic metacritic={game.metacritic} />
+                          ) : (
+                            <p>
+                              Metascore: <span>N/A</span>
+                            </p>
+                          )}
+                          <p>
+                            Playtime:{" "}
+                            {game.playtime > 0 ? game.playtime + " h" : "N/A"}
+                          </p>
+                        </Info>
+                      </GameImage>
+                      <LibraryDiv>
+                        <PlatformsDiv>
+                          <Platforms platforms={game.parent_platforms} />
+                          <Genres geners={game.genres} />
+                        </PlatformsDiv>
+                        <LibraryMenu gameId={game.id} />
+                      </LibraryDiv>
+                    </GameDiv>
+                  );
+                })}
+              </Games>
+              {/* <Pagination setPage={setPage} pageCount={pageCount} /> */}
+            </>
+          ) : (
+            <SpinnerOne />
+          )}
+        </Wrapper>
   );
 };
 
@@ -123,13 +141,8 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  img {
-    max-width: 260px;
-    min-width: 260px;
-    max-height: 140px;
-    min-height: 120px;
-    border-radius: 6px;
-    margin-right: 20px;
+  h3 {
+    margin-bottom: 15px;
   }
 `;
 const Games = styled.div`
@@ -148,6 +161,14 @@ const GameDiv = styled.div`
   border-radius: 6px;
   margin-bottom: 40px;
   padding: 15px;
+`;
+const Image = styled.img`
+  max-width: 260px;
+  min-width: 260px;
+  max-height: 140px;
+  min-height: 120px;
+  border-radius: 6px;
+  margin-right: 20px;
 `;
 const GameImage = styled.div`
   display: flex;
@@ -169,4 +190,11 @@ const PlatformsDiv = styled.div`
 const LibraryDiv = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+const Button = styled.button`
+  border: none;
+  padding: 4px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  background-color: var(--color-font);
 `;

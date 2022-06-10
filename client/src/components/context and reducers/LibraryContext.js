@@ -8,7 +8,7 @@ export const LibraryProvider = ({ children }) => {
   const [backlog, setBacklog] = useState([]);
   const [inProgress, setInProgress] = useState([]);
   const [completed, setCompleted] = useState([]);
-  const [abondoned, setAbandoned] = useState([]);
+  const [abandoned, setAbandoned] = useState([]);
 
   // saving the game on backlog list
   const handleBacklog = (gameId) => {
@@ -94,6 +94,20 @@ export const LibraryProvider = ({ children }) => {
       });
   };
 
+  // check if the gameId exist in one of the categories, if yes, change the + sign to name of the category
+
+  const findCategory = (gameId) => {
+    if (backlog.includes(gameId)) {
+      return "Backloged";
+    } else if (inProgress.includes(gameId)) {
+      return "Playing";
+    } else if (completed.includes(gameId)) {
+      return "Completed";
+    } else if (abandoned.includes(gameId)) {
+      return "Abandoned";
+    }
+  };
+
   return (
     <LibraryContext.Provider
       value={{
@@ -107,8 +121,9 @@ export const LibraryProvider = ({ children }) => {
         setInProgress,
         completed,
         setCompleted,
-        abondoned,
+        abandoned,
         setAbandoned,
+        findCategory,
       }}
     >
       {children}

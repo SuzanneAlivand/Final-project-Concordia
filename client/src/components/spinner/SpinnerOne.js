@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import mario from "../../assets/mario.gif";
 const Spinner = () => {
   return (
@@ -19,7 +18,7 @@ const Div = styled.div`
   height: 100vh;
   padding: 50px;
   img {
-    width: 15vw;
+    max-width: 10vw;
     height: auto;
   }
 `;

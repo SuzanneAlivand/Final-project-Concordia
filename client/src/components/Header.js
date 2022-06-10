@@ -9,7 +9,7 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = () => {
-  const { loginWithRedirect, logout, user, isAuthenticated, isLoading } =
+  const { loginWithRedirect, logout, user } =
     useAuth0();
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
   const [error, setError] = useState(false);

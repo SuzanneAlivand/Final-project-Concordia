@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import axel from "../../assets/axel.gif";
 const Spinner = () => {
   return (

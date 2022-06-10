@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Pagination from "../pagination/Pagination";
 import SpinnerTwo from "../spinner/SpinnerTwo";
 import Rating from "../gameParameters/Rating";
@@ -7,6 +7,7 @@ import Metacritic from "../gameParameters/Metacritic";
 import Platforms from "../gameParameters/Platforms";
 import Genres from "../gameParameters/Genres";
 import LibraryMenu from "../LibraryMenu";
+import { LibraryContext } from "../context and reducers/LibraryContext";
 
 const BestYearGames = () => {
   const [error, setError] = useState(false);
@@ -25,6 +26,7 @@ const BestYearGames = () => {
       })
       .catch((error) => setError(true));
   }, [page]);
+
   return (
     <Wrapper id="main-wrapper">
       {loaded ? (
@@ -34,7 +36,7 @@ const BestYearGames = () => {
               return (
                 <GameDiv key={game.id}>
                   <GameImage>
-                    <img src={game.background_image} />
+                    <Image src={game.background_image} />
                     <Info>
                       <h4>{game.name}</h4>
                       <Rating value={Number(game.rating)} />
@@ -85,14 +87,6 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  img {
-    max-width: 260px;
-    min-width: 260px;
-    max-height: 140px;
-    min-height: 120px;
-    border-radius: 6px;
-    margin-right: 20px;
-  }
 `;
 const Games = styled.div`
   display: flex;
@@ -110,6 +104,14 @@ const GameDiv = styled.div`
   border-radius: 6px;
   margin-bottom: 40px;
   padding: 15px;
+`;
+const Image = styled.img`
+  max-width: 260px;
+  min-width: 260px;
+  max-height: 140px;
+  min-height: 120px;
+  border-radius: 6px;
+  margin-right: 20px;
 `;
 const GameImage = styled.div`
   display: flex;
