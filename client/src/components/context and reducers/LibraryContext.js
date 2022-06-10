@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const LibraryContext = createContext();
@@ -9,6 +9,32 @@ export const LibraryProvider = ({ children }) => {
   const [inProgress, setInProgress] = useState([]);
   const [completed, setCompleted] = useState([]);
   const [abandoned, setAbandoned] = useState([]);
+  const [fetchCategory, setFetchCategory] = useState(false);
+
+  // get user
+  useEffect(() => {
+    if (user) {
+      setFetchCategory(false);
+      const headers = { email: user.email };
+      fetch("/api/user", { headers })
+        .then((res) => res.json())
+        .then((data) => {
+          setBacklog(data.data.backlog);
+          console.log(data.data);
+          setCompleted(data.data.completed);
+          setInProgress(data.data.inProgress);
+          setAbandoned(data.data.abandoned);
+          setFetchCategory(true);
+        })
+        .catch((error) => console.log(error));
+    } else if (!user) {
+      setFetchCategory(true);
+      setBacklog([]);
+      setInProgress([]);
+      setCompleted([]);
+      setAbandoned([]);
+    }
+  }, [user]);
 
   // saving the game on backlog list
   const handleBacklog = (gameId) => {
@@ -105,6 +131,8 @@ export const LibraryProvider = ({ children }) => {
       return "Completed";
     } else if (abandoned.includes(gameId)) {
       return "Abandoned";
+    } else {
+      return null;
     }
   };
 
@@ -124,6 +152,7 @@ export const LibraryProvider = ({ children }) => {
         abandoned,
         setAbandoned,
         findCategory,
+        fetchCategory,
       }}
     >
       {children}

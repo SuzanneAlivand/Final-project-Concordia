@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Metacritic = ({ metacritic }) => {
   return (
     <p>
-      Metacritic:{"  "}
+      MetaScore:{"  "}
       <Span
         color={
           metacritic >= 85

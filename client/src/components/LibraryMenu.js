@@ -7,10 +7,11 @@ import { GiRetroController } from "react-icons/gi";
 import { GiMedallist } from "react-icons/gi";
 import { VscLibrary } from "react-icons/vsc";
 import { LibraryContext } from "./context and reducers/LibraryContext";
+import SpinnerFive from "./spinner/SpinnerFive";
 
 const LibraryMenu = ({ gameId }) => {
   const [toggleMenu, setToggleMenue] = useState(false);
-  const { user, loginWithRedirect } = useAuth0();
+  const { user, loginWithRedirect, isLoading } = useAuth0();
   const menuRef = useRef(null);
   const {
     handleBacklog,
@@ -18,6 +19,7 @@ const LibraryMenu = ({ gameId }) => {
     handleInProgress,
     handleAbandoned,
     findCategory,
+    fetchCategory,
   } = useContext(LibraryContext);
   //......................
   // by click on + open the menu if user is logged in
@@ -48,9 +50,9 @@ const LibraryMenu = ({ gameId }) => {
 
   return (
     <>
-      {user && (
-        <Div>
-          {!category ? (
+      <Div>
+        {!isLoading && fetchCategory ? (
+          !category ? (
             <button className="Main" ref={menuRef} onClick={handleClick}>
               <HiPlus size="20px" />
             </button>
@@ -72,47 +74,51 @@ const LibraryMenu = ({ gameId }) => {
             </button>
           ) : (
             ""
-          )}
-          <Menu className={toggleMenu ? "active" : ""}>
-            <MenuItem
-              onClick={() => {
-                handleBacklog(gameId);
-              }}
-            >
-              <VscLibrary
-                style={{ marginRight: "6px", color: "var(--color-secondary)" }}
-              />
-              <p>Backlog</p>
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleInProgress(gameId);
-              }}
-            >
-              <GiRetroController
-                style={{ marginRight: "6px", color: "#ff9900" }}
-              />
-              <p>In Progress</p>
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleCompleted(gameId);
-              }}
-            >
-              <GiMedallist style={{ marginRight: "6px", color: "#00ff00" }} />
-              <p>Completed</p>
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleAbandoned(gameId);
-              }}
-            >
-              <GiSpiderWeb style={{ marginRight: "6px", color: "#ff0000" }} />
-              <p>Abandoned</p>
-            </MenuItem>
-          </Menu>
-        </Div>
-      )}
+          )
+        ) : (
+          <button className="spinner">
+            <SpinnerFive size="15px" />
+          </button>
+        )}
+        <Menu className={toggleMenu ? "active" : ""}>
+          <MenuItem
+            onClick={() => {
+              handleBacklog(gameId);
+            }}
+          >
+            <VscLibrary
+              style={{ marginRight: "6px", color: "var(--color-secondary)" }}
+            />
+            <p>Backlog</p>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleInProgress(gameId);
+            }}
+          >
+            <GiRetroController
+              style={{ marginRight: "6px", color: "#ff9900" }}
+            />
+            <p>In Progress</p>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleCompleted(gameId);
+            }}
+          >
+            <GiMedallist style={{ marginRight: "6px", color: "#00ff00" }} />
+            <p>Completed</p>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleAbandoned(gameId);
+            }}
+          >
+            <GiSpiderWeb style={{ marginRight: "6px", color: "#ff0000" }} />
+            <p>Abandoned</p>
+          </MenuItem>
+        </Menu>
+      </Div>
     </>
   );
 };
@@ -134,25 +140,29 @@ const Div = styled.div`
     background-color: #131d29;
     border-radius: 2px;
   }
-  .backlog{
-    padding: 3px 8px;
-    background-color: #2196F3;
-    border-radius:20px
+  .backlog {
+    padding: 2px 8px;
+    background-color: #2196f3;
+    border-radius: 20px;
   }
-  .completed{
-    padding: 3px 8px;
-    background-color: #4CAF50;
-    border-radius:20px
+  .completed {
+    padding: 2px 8px;
+    background-color: #4caf50;
+    border-radius: 20px;
   }
-  .abandoned{
-    padding: 3px 8px;
-    background-color: #F44336;
-    border-radius:20px
+  .abandoned {
+    margin-bottom: 10px;
+    background-color: #f44336;
+    border-radius: 20px;
   }
-  .playing{
-    padding: 3px 8px;
-    background-color: #9C27B0;
-    border-radius:20px
+  .playing {
+    padding: 2px 8px;
+    background-color: #9c27b0;
+    border-radius: 20px;
+  }
+  .spinner{
+    background-color: inherit;
+    padding: 3px 10px;
   }
 `;
 const Menu = styled.div`

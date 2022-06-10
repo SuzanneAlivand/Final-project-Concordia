@@ -10,7 +10,7 @@ import Genres from "../gameParameters/Genres";
 import SpinnerOne from "../spinner/SpinnerOne";
 
 const Backlog = () => {
-  const { user, loginWithRedirect } = useAuth0();
+  const { user, loginWithRedirect, isLoading } = useAuth0();
   const { backlog, setBacklog } = useContext(LibraryContext);
   const [backlogGames, setBacklogGames] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -58,6 +58,20 @@ const Backlog = () => {
     }
   }, [backlog]);
 
+  useEffect(() => {
+    if (user) {
+      setLoaded(false);
+    }
+  }, [user]);
+
+  if (isLoading) {
+    return (
+      <Wrapper style={{ textAlign: "center" }}>
+        <SpinnerOne />
+      </Wrapper>
+    );
+  }
+
   if (!user) {
     return (
       <Wrapper style={{ textAlign: "center" }}>
@@ -72,7 +86,7 @@ const Backlog = () => {
       </Wrapper>
     );
   }
-  
+
   if (loaded && backlogGames.length === 0) {
     return (
       <Wrapper style={{ textAlign: "center" }}>
@@ -82,48 +96,48 @@ const Backlog = () => {
   }
 
   return (
-        <Wrapper id="main-wrapper">
-          {loaded && backlogGames.length > 0 ? (
-            <>
-              <Games>
-                {backlogGames.map((game, index) => {
-                  return (
-                    <GameDiv key={`${index}backlog`}>
-                      <GameImage>
-                        <Image src={game.background_image} />
-                        <Info>
-                          <h4>{game.name}</h4>
-                          <Rating value={Number(game.rating)} />
-                          {game.metacritic > 0 ? (
-                            <Metacritic metacritic={game.metacritic} />
-                          ) : (
-                            <p>
-                              Metascore: <span>N/A</span>
-                            </p>
-                          )}
-                          <p>
-                            Playtime:{" "}
-                            {game.playtime > 0 ? game.playtime + " h" : "N/A"}
-                          </p>
-                        </Info>
-                      </GameImage>
-                      <LibraryDiv>
-                        <PlatformsDiv>
-                          <Platforms platforms={game.parent_platforms} />
-                          <Genres geners={game.genres} />
-                        </PlatformsDiv>
-                        <LibraryMenu gameId={game.id} />
-                      </LibraryDiv>
-                    </GameDiv>
-                  );
-                })}
-              </Games>
-              {/* <Pagination setPage={setPage} pageCount={pageCount} /> */}
-            </>
-          ) : (
-            <SpinnerOne />
-          )}
-        </Wrapper>
+    <Wrapper id="main-wrapper">
+      {loaded && backlogGames.length > 0 ? (
+        <>
+          <Games>
+            {backlogGames.map((game, index) => {
+              return (
+                <GameDiv key={`${index}backlog`}>
+                  <GameImage>
+                    <Image src={game.background_image} />
+                    <Info>
+                      <h4>{game.name}</h4>
+                      <Rating value={Number(game.rating)} />
+                      {game.metacritic > 0 ? (
+                        <Metacritic metacritic={game.metacritic} />
+                      ) : (
+                        <p>
+                          Metascore: <span>N/A</span>
+                        </p>
+                      )}
+                      <p>
+                        Playtime:{" "}
+                        {game.playtime > 0 ? game.playtime + " h" : "N/A"}
+                      </p>
+                    </Info>
+                  </GameImage>
+                  <LibraryDiv>
+                    <PlatformsDiv>
+                      <Platforms platforms={game.parent_platforms} />
+                      <Genres geners={game.genres} />
+                    </PlatformsDiv>
+                    <LibraryMenu gameId={game.id} />
+                  </LibraryDiv>
+                </GameDiv>
+              );
+            })}
+          </Games>
+          {/* <Pagination setPage={setPage} pageCount={pageCount} /> */}
+        </>
+      ) : (
+        <SpinnerOne />
+      )}
+    </Wrapper>
   );
 };
 

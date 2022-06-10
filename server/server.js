@@ -17,6 +17,7 @@ const { addAbandoned } = require("./handlers/addAbandoned");
 const { addInProgress } = require("./handlers/addInProgress");
 const { getGameById } = require("./handlers/getGameById");
 const { getBacklog } = require("./handlers/getBacklog");
+const { getUser } = require("./handlers/getUser");
 
 const app = express();
 app.use(morgan("tiny")); // ??
@@ -59,8 +60,12 @@ app.get("/api/popular2021", popularOfYear);
 app.get("/api/search", search);
 
 //..............................
-// search games
+// add user to db
 app.post("/api/new-user", addUser);
+
+//..............................
+// user user from db
+app.get("/api/user", getUser);
 
 //..............................
 // add a game to backlog list
@@ -85,8 +90,6 @@ app.get("/api/game", getGameById);
 //..............................
 // get backlog list of a specific user
 app.get("/api/backlog", getBacklog);
-
-
 
 app.get("/", (req, res) => {
   res.send("Hi");
