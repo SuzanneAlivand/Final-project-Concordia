@@ -8,6 +8,7 @@ import Platforms from "../gameParameters/Platforms";
 import LibraryMenu from "../LibraryMenu";
 import Genres from "../gameParameters/Genres";
 import SpinnerOne from "../spinner/SpinnerOne";
+import { FiX } from "react-icons/fi";
 
 const Backlog = () => {
   const { user, loginWithRedirect, isLoading } = useAuth0();
@@ -64,6 +65,18 @@ const Backlog = () => {
     }
   }, [user]);
 
+  // handle removing item from list
+  const handleRemove = (id) => {
+    const headers = { email: user.email };
+    fetch(`/api/backlog-remove/${id}`, { method: 'DELETE', headers })
+      .then((res) => res.json())
+      .then((data) => {
+        // setPageCount(Math.ceil(data.data.count / 20));
+        setBacklog(data.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
   if (isLoading) {
     return (
       <Wrapper style={{ textAlign: "center" }}>
@@ -102,33 +115,42 @@ const Backlog = () => {
           <Games>
             {backlogGames.map((game, index) => {
               return (
-                <GameDiv key={`${index}backlog`}>
-                  <GameImage>
-                    <Image src={game.background_image} />
-                    <Info>
-                      <h4>{game.name}</h4>
-                      <Rating value={Number(game.rating)} />
-                      {game.metacritic > 0 ? (
-                        <Metacritic metacritic={game.metacritic} />
-                      ) : (
+                <Game>
+                  <GameDiv key={`${index}backlog`}>
+                    <GameImage>
+                      <Image src={game.background_image} />
+                      <Info>
+                        <h4>{game.name}</h4>
+                        <Rating value={Number(game.rating)} />
+                        {game.metacritic > 0 ? (
+                          <Metacritic metacritic={game.metacritic} />
+                        ) : (
+                          <p>
+                            Metascore: <span>N/A</span>
+                          </p>
+                        )}
                         <p>
-                          Metascore: <span>N/A</span>
+                          Playtime:{" "}
+                          {game.playtime > 0 ? game.playtime + " h" : "N/A"}
                         </p>
-                      )}
-                      <p>
-                        Playtime:{" "}
-                        {game.playtime > 0 ? game.playtime + " h" : "N/A"}
-                      </p>
-                    </Info>
-                  </GameImage>
-                  <LibraryDiv>
-                    <PlatformsDiv>
-                      <Platforms platforms={game.parent_platforms} />
-                      <Genres geners={game.genres} />
-                    </PlatformsDiv>
-                    <LibraryMenu gameId={game.id} />
-                  </LibraryDiv>
-                </GameDiv>
+                      </Info>
+                    </GameImage>
+                    <LibraryDiv>
+                      <PlatformsDiv>
+                        <Platforms platforms={game.parent_platforms} />
+                        <Genres geners={game.genres} />
+                      </PlatformsDiv>
+                      <LibraryMenu gameId={game.id} />
+                    </LibraryDiv>
+                  </GameDiv>
+                  <Remove
+                    onClick={() => {
+                      handleRemove(game.id);
+                    }}
+                  >
+                    <FiX className="removeIcon" />
+                  </Remove>
+                </Game>
               );
             })}
           </Games>
@@ -165,7 +187,12 @@ const Games = styled.div`
   justify-content: space-around;
   align-items: flex-start;
 `;
+const Game = styled.div`
+  display: flex;
+  align-items: flex-start;
+`;
 const GameDiv = styled.div`
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -173,7 +200,6 @@ const GameDiv = styled.div`
   height: 230px;
   background-color: #010206;
   border-radius: 6px;
-  margin-bottom: 40px;
   padding: 15px;
 `;
 const Image = styled.img`
@@ -211,4 +237,20 @@ const Button = styled.button`
   border-radius: 2px;
   cursor: pointer;
   background-color: var(--color-font);
+`;
+const Remove = styled.button`
+  margin-left: 6px;
+  padding: 2px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: inherit;
+  border: 0.3px solid #333123;
+  .removeIcon {
+    color: #ff0000;
+    cursor: pointer;
+    font-size: 20px;
+  }
 `;

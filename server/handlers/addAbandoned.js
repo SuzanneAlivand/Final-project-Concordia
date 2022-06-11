@@ -1,5 +1,5 @@
-const path = require("path");
-require("dotenv").config({ path: "./.env" });
+
+require("dotenv").config();
 const { MongoClient } = require("mongodb");
 const { MONGO_URI } = process.env;
 const options = {

@@ -18,6 +18,7 @@ const { addInProgress } = require("./handlers/addInProgress");
 const { getGameById } = require("./handlers/getGameById");
 const { getBacklog } = require("./handlers/getBacklog");
 const { getUser } = require("./handlers/getUser");
+const {deleteFromBacklog} = require("./handlers/deleteFromBacklog")
 
 const app = express();
 app.use(morgan("tiny")); // ??
@@ -64,7 +65,7 @@ app.get("/api/search", search);
 app.post("/api/new-user", addUser);
 
 //..............................
-// user user from db
+// get user from db
 app.get("/api/user", getUser);
 
 //..............................
@@ -90,6 +91,10 @@ app.get("/api/game", getGameById);
 //..............................
 // get backlog list of a specific user
 app.get("/api/backlog", getBacklog);
+
+//..............................
+// delete a game from backlog list of a specific user
+app.delete("/api/backlog-remove/:id",deleteFromBacklog)
 
 app.get("/", (req, res) => {
   res.send("Hi");

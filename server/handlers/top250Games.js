@@ -1,6 +1,5 @@
 const request = require("request-promise");
-const path = require("path");
-require("dotenv").config({ path: "./.env" });
+require("dotenv").config();
 const { RapidAPI_Key } = process.env;
 
 const getPopularGames = async (page) => {
