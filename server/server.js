@@ -140,7 +140,7 @@ app.get("/api/shooter", getShooterGames);
 
 //..............................
 // get all the adventure games
-app.get("/api/adventure", getAdventureGames);
+app.get("/api/advanture", getAdventureGames);
 
 //..............................
 // get all the racing games
@@ -152,7 +152,7 @@ app.get("/api/sports", getSportsGames);
 
 //..............................
 // get all the puzzle games
-// app.get("/api/puzzle", getPuzzleGames);
+app.get("/api/puzzle", getPuzzleGames);
 
 app.get("/", (req, res) => {
   res.send("this is the root");
