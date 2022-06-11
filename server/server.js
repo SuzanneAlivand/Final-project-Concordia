@@ -1,8 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
-
-const path = require("path");
-require("dotenv").config({ path: "./.env" });
+require("dotenv").config();
 
 const port = process.env.PORT || 5000;
 const { getPopularGames } = require("./handlers/top250Games");
@@ -18,12 +16,18 @@ const { addInProgress } = require("./handlers/addInProgress");
 const { getGameById } = require("./handlers/getGameById");
 const { getBacklog } = require("./handlers/getBacklog");
 const { getUser } = require("./handlers/getUser");
-const {deleteFromBacklog} = require("./handlers/deleteFromBacklog")
+const { deleteFromBacklog } = require("./handlers/deleteFromBacklog");
+const { getCompleted } = require("./handlers/getCompleted");
+const { deleteFromCompleted } = require("./handlers/deleteFromCompleted");
+const { deleteFromInProgress } = require("./handlers/deleteFromInProgress");
+const { getInProgress } = require("./handlers/getInProgress");
+const { getAbandoned } = require("./handlers/getAbandoned");
+const { deleteFromAbandoned } = require("./handlers/deleteFromAbandoned");
 
 const app = express();
-app.use(morgan("tiny")); // ??
-app.use(express.static("public")); // ??
-app.use(express.json()); //?
+app.use(morgan("tiny")); 
+app.use(express.static("public"));
+app.use(express.json()); 
 
 //..............................
 // get all games
@@ -93,8 +97,32 @@ app.get("/api/game", getGameById);
 app.get("/api/backlog", getBacklog);
 
 //..............................
+// get completed list of a specific user
+app.get("/api/completed", getCompleted);
+
+//..............................
+// get in progress list of a specific user
+app.get("/api/inProgress", getInProgress);
+
+//..............................
+// get abandoned list of a specific user
+app.get("/api/abandoned", getAbandoned);
+
+//..............................
 // delete a game from backlog list of a specific user
-app.delete("/api/backlog-remove/:id",deleteFromBacklog)
+app.delete("/api/backlog-remove/:id", deleteFromBacklog);
+
+//..............................
+// delete a game from completed list of a specific user
+app.delete("/api/completed-remove/:id", deleteFromCompleted);
+
+//..............................
+// delete a game from in progress list of a specific user
+app.delete("/api/inProgress-remove/:id", deleteFromInProgress);
+
+//..............................
+// delete a game from abandoned list of a specific user
+app.delete("/api/abandoned-remove/:id", deleteFromAbandoned);
 
 app.get("/", (req, res) => {
   res.send("Hi");

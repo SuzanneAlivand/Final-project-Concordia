@@ -6,7 +6,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
-const getBacklog = async (req, res) => {
+const getInProgress = async (req, res) => {
   const userEmail = req.headers.email;
   try {
     // find the user db,
@@ -15,13 +15,13 @@ const getBacklog = async (req, res) => {
     const db = client.db("Final-project");
     const result = await db.collection("users").findOne({ email: userEmail });
     // user's collections
-    const { backlog} = result;
+    const { inProgress } = result;
 
-    res.status(201).json({ status: 200, data: backlog });
+    res.status(201).json({ status: 200, data: inProgress });
     client.close();
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
   }
 };
 
-module.exports = { getBacklog };
+module.exports = { getInProgress };

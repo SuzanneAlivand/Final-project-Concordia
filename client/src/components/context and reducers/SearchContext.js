@@ -40,7 +40,7 @@ const SearchProvider = ({ children }) => {
         setSearchTerm,
         searchGame,
         setSearchGame,
-        setError,
+        error,
         setPageCount,
         pageCount,
         page,

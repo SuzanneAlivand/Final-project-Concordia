@@ -10,6 +10,7 @@ import Genres from "../gameParameters/Genres";
 import SpinnerOne from "../spinner/SpinnerOne";
 import { FiX } from "react-icons/fi";
 import Pagination from "../pagination/Pagination";
+import Error from "../Error";
 
 const Backlog = () => {
   const { user, loginWithRedirect, isLoading } = useAuth0();
@@ -18,6 +19,7 @@ const Backlog = () => {
   const [loaded, setLoaded] = useState(false);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
+  const [error, setError] = useState(false);
 
   // get a list of backlog games'IDs from backend
   useEffect(() => {
@@ -29,7 +31,7 @@ const Backlog = () => {
           setPageCount(Math.ceil(data.data.length / 20));
           setBacklog(data.data);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => setError(true));
     }
   }, [user]);
 
@@ -53,7 +55,7 @@ const Backlog = () => {
                 setBacklogGames(gamesInBacklog);
               }
             })
-            .catch((error) => console.log(error));
+            .catch((error) => setError(true));
         });
       } else {
         setLoaded(true);
@@ -77,7 +79,7 @@ const Backlog = () => {
         setPageCount(Math.ceil(data.data.length / 20));
         setBacklog(data.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setError(true));
   };
 
   if (isLoading) {
@@ -106,7 +108,15 @@ const Backlog = () => {
   if (loaded && backlogGames.length === 0) {
     return (
       <Wrapper style={{ textAlign: "center" }}>
-        <h3>Your backlog is empty!</h3>
+        <h3>Your list is empty!</h3>
+      </Wrapper>
+    );
+  }
+
+  if (error) {
+    return (
+      <Wrapper>
+        <Error />
       </Wrapper>
     );
   }

@@ -16,45 +16,49 @@ const SearchResult = () => {
 
   return (
     <Wrapper id="main-wrapper">
-      {loaded ? (
-        <>
-          <Games>
-            {searchGame?.map((game) => {
-              return (
-                <GameDiv key={game.id}>
-                  <GameImage>
-                    <Image src={game.background_image} />
-                    <Info>
-                      <h4>{game.name}</h4>
-                      <Rating value={Number(game.rating)} />
-                      {game.metacritic > 0 ? (
-                        <Metacritic metacritic={game.metacritic} />
-                      ) : (
+      {error ? (
+        loaded ? (
+          <>
+            <Games>
+              {searchGame?.map((game) => {
+                return (
+                  <GameDiv key={game.id}>
+                    <GameImage>
+                      <Image src={game.background_image} />
+                      <Info>
+                        <h4>{game.name}</h4>
+                        <Rating value={Number(game.rating)} />
+                        {game.metacritic > 0 ? (
+                          <Metacritic metacritic={game.metacritic} />
+                        ) : (
+                          <p>
+                            Metascore: <span>N/A</span>
+                          </p>
+                        )}
                         <p>
-                          Metascore: <span>N/A</span>
+                          Playtime:{" "}
+                          {game.playtime > 0 ? game.playtime + " h" : "N/A"}
                         </p>
-                      )}
-                      <p>
-                        Playtime:{" "}
-                        {game.playtime > 0 ? game.playtime + " h" : "N/A"}
-                      </p>
-                    </Info>
-                  </GameImage>
-                  <LibraryDiv>
-                    <PlatformsDiv>
-                      <Platforms platforms={game.parent_platforms} />
-                      <Genres geners={game.genres} />
-                    </PlatformsDiv>
-                    <LibraryMenu gameId={game.id} />
-                  </LibraryDiv>
-                </GameDiv>
-              );
-            })}
-          </Games>
-          <Pagination setPage={setPage} pageCount={pageCount} />
-        </>
+                      </Info>
+                    </GameImage>
+                    <LibraryDiv>
+                      <PlatformsDiv>
+                        <Platforms platforms={game.parent_platforms} />
+                        <Genres geners={game.genres} />
+                      </PlatformsDiv>
+                      <LibraryMenu gameId={game.id} />
+                    </LibraryDiv>
+                  </GameDiv>
+                );
+              })}
+            </Games>
+            <Pagination setPage={setPage} pageCount={pageCount} />
+          </>
+        ) : (
+          <SpinnerOne />
+        )
       ) : (
-        <SpinnerOne />
+        <Error />
       )}
     </Wrapper>
   );
