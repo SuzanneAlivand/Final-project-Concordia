@@ -9,12 +9,15 @@ import LibraryMenu from "../LibraryMenu";
 import Genres from "../gameParameters/Genres";
 import SpinnerOne from "../spinner/SpinnerOne";
 import { FiX } from "react-icons/fi";
+import Pagination from "../pagination/Pagination";
 
 const Backlog = () => {
   const { user, loginWithRedirect, isLoading } = useAuth0();
   const { backlog, setBacklog } = useContext(LibraryContext);
   const [backlogGames, setBacklogGames] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
 
   // get a list of backlog games'IDs from backend
   useEffect(() => {
@@ -23,7 +26,7 @@ const Backlog = () => {
       fetch("/api/backlog", { headers })
         .then((res) => res.json())
         .then((data) => {
-          // setPageCount(Math.ceil(data.data.count / 20));
+          setPageCount(Math.ceil(data.data.length / 20));
           setBacklog(data.data);
         })
         .catch((error) => console.log(error));
@@ -68,10 +71,10 @@ const Backlog = () => {
   // handle removing item from list
   const handleRemove = (id) => {
     const headers = { email: user.email };
-    fetch(`/api/backlog-remove/${id}`, { method: 'DELETE', headers })
+    fetch(`/api/backlog-remove/${id}`, { method: "DELETE", headers })
       .then((res) => res.json())
       .then((data) => {
-        // setPageCount(Math.ceil(data.data.count / 20));
+        setPageCount(Math.ceil(data.data.length / 20));
         setBacklog(data.data);
       })
       .catch((error) => console.log(error));
@@ -154,7 +157,7 @@ const Backlog = () => {
               );
             })}
           </Games>
-          {/* <Pagination setPage={setPage} pageCount={pageCount} /> */}
+          <Pagination setPage={setPage} pageCount={pageCount} />
         </>
       ) : (
         <SpinnerOne />
@@ -184,6 +187,7 @@ const Wrapper = styled.div`
 const Games = styled.div`
   display: flex;
   flex-wrap: wrap;
+  min-height: 500px;
   justify-content: space-around;
   align-items: flex-start;
 `;
@@ -197,7 +201,7 @@ const GameDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 500px;
-  height: 230px;
+  min-height: 230px;
   background-color: #010206;
   border-radius: 6px;
   padding: 15px;

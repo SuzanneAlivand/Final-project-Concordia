@@ -1,14 +1,19 @@
 import { createContext, useState, useEffect, useContext } from "react";
+import queryString from 'query-string';
 
 export const SearchContext = createContext();
 
+let query = queryString.parse(window.location.search).q;
+
 const SearchProvider = ({ children }) => {
   const [loaded, setLoaded] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("" || query);
   const [searchGame, setSearchGame] = useState([]);
   const [error, setError] = useState(false);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
+
+
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -26,7 +31,7 @@ const SearchProvider = ({ children }) => {
       }
     }, 500);
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm]);
+  }, [page,searchTerm]);
 
   return (
     <SearchContext.Provider

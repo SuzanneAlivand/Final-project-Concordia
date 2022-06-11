@@ -93,13 +93,14 @@ const Games = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: flex-start;
+  min-height: 500px;
 `;
 const GameDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 500px;
-  height: 230px;
+  min-height: 230px;
   background-color: #010206;
   border-radius: 6px;
   margin-bottom: 40px;

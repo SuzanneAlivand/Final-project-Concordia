@@ -32,7 +32,7 @@ const Searchbar = () => {
     switch (e.key) {
       case "Enter": {
         if (searchGame.length !== 0 && e.target.value.length !== 0) {
-          history.push("/search");
+          history.push(`/search?q=${searchTerm}`);
         }
       }
     }
