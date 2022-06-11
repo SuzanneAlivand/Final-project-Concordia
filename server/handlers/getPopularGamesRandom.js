@@ -2,8 +2,8 @@ const request = require("request-promise");
 require("dotenv").config();
 const { RapidAPI_Key } = process.env;
 
-const getPopularGames = async (req, res) => {
-  const page = req.query.page || 1;
+const getPopularGamesRandom = async (req, res) => {
+  const page = req.params.page || 1;
   const options = {
     method: "GET",
     uri: `https://rawg.io/api/games/lists/popular?discover=true&&page_size=20&page=${page}&key=${RapidAPI_Key}`,
@@ -26,4 +26,4 @@ const getPopularGames = async (req, res) => {
   }
 };
 
-module.exports = { getPopularGames };
+module.exports = { getPopularGamesRandom };
