@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 const { v4: uuidv4 } = require("uuid");
 const { MongoClient } = require("mongodb");
@@ -11,6 +10,8 @@ const options = {
 const addUser = async (req, res) => {
   const { user } = req.body;
   const userEmail = user.email;
+  const logIn = Date();
+  console.log(logIn);
   try {
     // check if the user already exist or not
     const client = new MongoClient(MONGO_URI, options);
@@ -24,6 +25,7 @@ const addUser = async (req, res) => {
     } else {
       const NewUser = Object.assign(
         { _id: uuidv4() },
+        { lastLogIn: Date() },
         user,
         { backlog: [] },
         { completed: [] },

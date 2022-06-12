@@ -1,10 +1,22 @@
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import Moment from "react-moment";
+import moment from "moment";
 
 const Profile = () => {
   const { loginWithRedirect, logout, user } = useAuth0();
 
-  return <Wrapper>profileee</Wrapper>;
+  if (user) {
+    const y = moment(user.updated_at).format('lll');
+  }
+  const x= new Date();
+  const c = moment(x).format('lll');
+
+  return (
+    <Wrapper>
+      profileee 
+    </Wrapper>
+  );
 };
 
 export default Profile;
@@ -22,3 +34,5 @@ const Wrapper = styled.div`
     display: none;
   }
 `;
+
+// {user && <Moment format="D MMM YYYY">{x}</Moment>}
