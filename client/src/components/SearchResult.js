@@ -16,7 +16,7 @@ const SearchResult = () => {
 
   return (
     <Wrapper id="main-wrapper">
-      {error ? (
+      {!error ? (
         loaded ? (
           <>
             <Games>
