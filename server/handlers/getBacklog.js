@@ -17,10 +17,10 @@ const getBacklog = async (req, res) => {
     // user's collections
     const { backlog} = result;
 
-    res.status(201).json({ status: 200, data: backlog });
+    return res.status(201).json({ status: 200, data: backlog });
     client.close();
   } catch (err) {
-    res.status(500).json({ status: 500, message: err.message });
+    return res.status(500).json({ status: 500, message: err.message });
   }
 };
 

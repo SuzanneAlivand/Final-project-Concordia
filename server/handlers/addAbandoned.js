@@ -45,10 +45,10 @@ const addAbandoned = async (req, res) => {
         },
       }
     );
-    res.status(201).json({ status: 201, data: collections });
+    return res.status(201).json({ status: 201, data: collections });
     client.close();
   } catch (err) {
-    res.status(500).json({ status: 500, message: err.message });
+    return res.status(500).json({ status: 500, message: err.message });
   }
 };
 

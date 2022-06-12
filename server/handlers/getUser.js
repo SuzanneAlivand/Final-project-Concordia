@@ -15,10 +15,10 @@ const getUser = async (req, res) => {
     await client.connect();
     const db = client.db("Final-project");
     const result = await db.collection("users").findOne({ email: userEmail });
-    res.status(201).json({ status: 200, data: result });
+    return res.status(201).json({ status: 200, data: result });
     client.close();
   } catch (err) {
-    res.status(500).json({ status: 500, message: err.message });
+    return res.status(500).json({ status: 500, message: err.message });
   }
 };
 

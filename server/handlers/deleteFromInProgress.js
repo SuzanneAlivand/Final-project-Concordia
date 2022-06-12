@@ -25,10 +25,10 @@ const deleteFromInProgress = async (req, res) => {
         { email: userEmail },
         { $set: { inProgress: newInProgress } }
       );
-    res.status(204).json({ status: 204, data: newInProgress });
+    return res.status(200).json({ status: 200, data: newInProgress });
     client.close();
   } catch (err) {
-    res.status(500).json({ status: 500, message: err.message });
+    return res.status(500).json({ status: 500, message: err.message });
   }
 };
 

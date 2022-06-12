@@ -25,10 +25,10 @@ const deleteFromBacklog = async (req, res) => {
         { email: userEmail },
         { $set: { backlog: newBacklog } }
       );
-    res.status(204).json({ status: 204, data: newBacklog });
+    return res.status(200).json({ status: 200, data: newBacklog });
     client.close();
   } catch (err) {
-    res.status(500).json({ status: 500, message: err.message });
+    return res.status(500).json({ status: 500, message: err.message });
   }
 };
 

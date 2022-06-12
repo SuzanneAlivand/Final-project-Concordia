@@ -51,7 +51,7 @@ const LibraryMenu = ({ gameId }) => {
   return (
     <>
       <Div>
-        {!isLoading && fetchCategory ? (
+        {!isLoading || fetchCategory ? (
           !category ? (
             <button className="Main" ref={menuRef} onClick={handleClick}>
               <HiPlus size="20px" />

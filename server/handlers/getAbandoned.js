@@ -17,10 +17,10 @@ const getAbandoned = async (req, res) => {
     // user's collections
     const { abandoned } = result;
 
-    res.status(201).json({ status: 200, data: abandoned });
+    return res.status(201).json({ status: 200, data: abandoned });
     client.close();
   } catch (err) {
-    res.status(500).json({ status: 500, message: err.message });
+    return res.status(500).json({ status: 500, message: err.message });
   }
 };
 
