@@ -7,10 +7,10 @@ import { RiLoginBoxLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useHistory } from "react-router-dom";
 
 const Header = () => {
-  const { loginWithRedirect, logout, user } =
-    useAuth0();
+  const { loginWithRedirect, logout, user } = useAuth0();
   const [toggleProfileMenu, setToggleProfileMenu] = useState(false);
   const [error, setError] = useState(false);
   const menuRef = useRef(null);
@@ -62,6 +62,11 @@ const Header = () => {
     };
   }, [toggleProfileMenu]);
 
+  const history = useHistory();
+  const handleGoToProfile = () => {
+    history.push("/profile");
+  };
+
   return (
     <Div>
       <Container>
@@ -78,7 +83,7 @@ const Header = () => {
           </Profile>
           {user && (
             <UserMenuWrapper className={toggleProfileMenu ? "active" : ""}>
-              <MenuItem>
+              <MenuItem onClick={handleGoToProfile}>
                 <CgProfile style={{ marginRight: "8px" }} />
                 <p>Profile</p>
               </MenuItem>

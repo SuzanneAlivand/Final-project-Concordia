@@ -21,6 +21,7 @@ import Abandoned from "./library/Abandoned";
 import Completed from "./library/Completed";
 import InProgress from "./library/InProgress";
 import Backlog from "./library/Backlog";
+import Profile from "./Profile";
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
           <Route exath path="/inProgress" component={InProgress} />
           <Route exath path="/completed" component={Completed} />
           <Route exath path="/abandoned" component={Abandoned} />
+          <Route exath path="/profile" component={Profile} />
         </Switch>
       </Div>
     </Router>

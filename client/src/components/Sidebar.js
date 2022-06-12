@@ -17,7 +17,7 @@ import adventure from "../assets/adventure.png";
 import puzzle from "../assets/puzzle.png";
 import racing from "../assets/racing.png";
 import sports from "../assets/sports.png";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const Sidebar = () => {
