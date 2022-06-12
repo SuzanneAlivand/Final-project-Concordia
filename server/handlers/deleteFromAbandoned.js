@@ -25,7 +25,7 @@ const deleteFromAbandoned = async (req, res) => {
         { email: userEmail },
         { $set: { abandoned: newAbandoned } }
       );
-    res.status(201).json({ status: 200, data: newAbandoned });
+    res.status(204).json({ status: 204, data: newAbandoned });
     client.close();
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });

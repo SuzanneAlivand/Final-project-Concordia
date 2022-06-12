@@ -31,7 +31,8 @@ const { getShooterGames } = require("./handlers/genres/getShooterGames");
 const { getAdventureGames } = require("./handlers/genres/getAdventureGames");
 const { getRacingGames } = require("./handlers/genres/getRacingGames");
 const { getSportsGames } = require("./handlers/genres/getSportsGames");
-const {getPuzzleGames}=require("./handlers/genres/getPuzzleGames")
+const { getPuzzleGames } = require("./handlers/genres/getPuzzleGames");
+const { deleteUser } = require("./handlers/deleteUser");
 
 const app = express();
 app.use(morgan("tiny"));
@@ -153,6 +154,10 @@ app.get("/api/sports", getSportsGames);
 //..............................
 // get all the puzzle games
 app.get("/api/puzzle", getPuzzleGames);
+
+//..............................
+// delete an acount
+app.delete("/api/delete-accont", deleteUser);
 
 app.get("/", (req, res) => {
   res.send("this is the root");

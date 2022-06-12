@@ -19,13 +19,17 @@ const addUser = async (req, res) => {
     const db = client.db("Final-project");
     const result = await db.collection("users").findOne({ email: userEmail });
     if (result) {
-      res
+      await db
+        .collection("users")
+        .findOneAndUpdate({ email: userEmail }, { $set: { lastLogIn: logIn } });
+      return res
         .status(200)
         .json({ status: 200, message: "This user already exist!" });
     } else {
       const NewUser = Object.assign(
         { _id: uuidv4() },
         { lastLogIn: Date() },
+        {joined: Date()},
         user,
         { backlog: [] },
         { completed: [] },
@@ -33,11 +37,11 @@ const addUser = async (req, res) => {
         { inProgress: [] }
       );
       await db.collection("users").insertOne(NewUser);
-      res.status(201).json({ status: 201, message: "New user added!" });
+      return res.status(201).json({ status: 201, message: "New user added!" });
       client.close();
     }
   } catch (err) {
-    res.status(500).json({ status: 500, message: err.message });
+    return res.status(500).json({ status: 500, message: err.message });
   }
 };
 

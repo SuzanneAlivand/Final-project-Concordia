@@ -25,7 +25,7 @@ const deleteFromCompleted = async (req, res) => {
         { email: userEmail },
         { $set: { completed: newCompleted } }
       );
-    res.status(201).json({ status: 200, data: newCompleted });
+    res.status(204).json({ status: 204, data: newCompleted });
     client.close();
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
