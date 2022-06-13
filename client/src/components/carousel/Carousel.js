@@ -9,7 +9,6 @@ const Carousel = ({ topGames }) => {
   const [slideNumber, setSlideNumber] = useState(0);
   const handleClick = (direction) => {
     let distance = listRef.current.getBoundingClientRect().x - 333;
-    console.log(distance);
     if (direction === "left" && slideNumber > 0) {
       setSlideNumber(slideNumber - 1);
       listRef.current.style.transform = `translateX(${320 + distance}px)`;

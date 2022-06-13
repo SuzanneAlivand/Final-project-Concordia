@@ -11,7 +11,6 @@ const addUser = async (req, res) => {
   const { user } = req.body;
   const userEmail = user.email;
   const logIn = Date();
-  console.log(logIn);
   try {
     // check if the user already exist or not
     const client = new MongoClient(MONGO_URI, options);

@@ -15,7 +15,6 @@ const deleteFromCompleted = async (req, res) => {
     await client.connect();
     const db = client.db("Final-project");
     const result = await db.collection("users").findOne({ email: userEmail });
-    console.log(result);
     // user's collections
     const { completed } = result;
     newCompleted = completed.filter((x) => x !== Number(id));

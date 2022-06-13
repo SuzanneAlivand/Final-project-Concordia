@@ -19,7 +19,6 @@ const allGames = async (req, res) => {
       data: data,
     });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({
       status: 500,
       err,

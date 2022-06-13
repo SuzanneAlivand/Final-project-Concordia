@@ -25,7 +25,6 @@ const SearchProvider = ({ children }) => {
             setSearchGame(data.data.results);
             setPageCount(Math.ceil(data.data.count / 20));
             setLoaded(true);
-            console.log(data.data.next);
           })
           .catch((error) => setError(true));
       }

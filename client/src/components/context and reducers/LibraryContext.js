@@ -20,7 +20,6 @@ export const LibraryProvider = ({ children }) => {
         .then((res) => res.json())
         .then((data) => {
           setBacklog(data.data.backlog);
-          console.log(data.data);
           setCompleted(data.data.completed);
           setInProgress(data.data.inProgress);
           setAbandoned(data.data.abandoned);
