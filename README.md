@@ -15,7 +15,7 @@ This website essentially allows you to organize and keep track of your progress 
 3. completed and
 4. abandoned.
 
-## Tech Stack 👩🏼‍💻
+## Tech Stack 💻
 
 - CSS
 - React.js
