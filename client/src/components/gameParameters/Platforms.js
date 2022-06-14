@@ -9,7 +9,7 @@ import { MdPhoneAndroid } from "react-icons/md";
 const Platforms = ({ platforms }) => {
   return (
     <Div>
-      {platforms.map((item, index) => {
+      {platforms?.map((item, index) => {
         if (item.platform.name === "PC") {
           return (
             <span key={index}>
