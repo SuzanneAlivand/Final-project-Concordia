@@ -15,7 +15,7 @@ This website essentially allows you to organize and keep track of your progress 
 3. completed and
 4. abandoned.
 
-### Tech Stack 💻
+## Tech Stack 💻
 
 - CSS
 - React.js
@@ -23,9 +23,9 @@ This website essentially allows you to organize and keep track of your progress 
 - Express.js
 - MongoDB
 
-### Project Setup 🛠
+## Project Setup 🛠
 
-#### The Frontend
+### The Frontend
 
 1. Open a terminal in VSCode
 2. Type the following command:
@@ -42,7 +42,7 @@ This website essentially allows you to organize and keep track of your progress 
 
 4. Use yarn start to start the frontend environment.
 
-#### The Backend
+### The Backend
 
 1. Open another terminal in VSCode
 2. Type the following command:
@@ -63,13 +63,13 @@ This website essentially allows you to organize and keep track of your progress 
    yarn start
 ```
 
-### Config ⚙️
+## Config ⚙️
 
 You are going to need an API key from **rawg.io** in order to run this project. I've also used **Auth0** for authentication so you need to have acquired an Auth0 domain and client key. You also need to connect a **mongoDB** to this project.
 
 ## Live Version Deployed on Heroku 🌐
 
-#### [mycatlog.tk](https://mycatlog.tk)
+### [mycatlog.tk](https://mycatlog.tk)
 
 ## Youtube Demo 📺
 
