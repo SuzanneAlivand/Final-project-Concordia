@@ -67,7 +67,7 @@ This website essentially allows you to organize and keep track of your progress 
 
 You are going to need an API key from **rawg.io** in order to run this project. I've also used **Auth0** for authentication so you need to have acquired an Auth0 domain and client key. You also need to connect a **mongoDB** to this project.
 
-## Live Version Deployed on Heroku 🌐🔗
+## Live Version Deployed on Heroku 🌐
 
 #### [mycatlog.tk](https://mycatlog.tk)
 
