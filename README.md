@@ -6,13 +6,13 @@ For authentication purposes, I've used [Auth0](https://auth0.com/).
 
 
 ## About My Catlog
-This webiste esentially allows you to organize and keep track of your progress in your favorite games. You can search for anygame you want and add it to your library. By being logged in, you are allowed to tag your games with any of these four categories:
+This webiste esentially allows you to organize and keep track of your progress in your favorite games. You can search for any game you want and add it to your library. By being logged in, you are allowed to tag your games with any of these four categories:
 1. backlog,
 2. in-progress,
 3. completed and 
 4. abandoned.
 
-### tech Stack
+### Tech Stack
 * CSS
 * React.js
 * Node.js
