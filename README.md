@@ -1,5 +1,5 @@
 #  My catlog 
-### Final-project Concordia's full-stack web development bootcamp
+### Final-project of Concordia's full-stack web development bootcamp
 This is a full-stack project using MERN. Pure CSS is used for styling. 
 An external API called [RAWG](https://rawg.io/apidocs) is used to fetch the required data. 
 For authentication purposes, I've used [Auth0](https://auth0.com/). I deployed this project on [heroku](heroku.com) using its free-tier hosting service. I have also used [freenom](https://www.freenom.com/en/index.html?lang=en) to register mycatlog.tk domain.
