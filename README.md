@@ -2,7 +2,7 @@
 ### Final-project Concordia's full-stack web development bootcamp
 This is a full-stack project using MERN. Pure CSS is used for styling. 
 An external API called [RAWG](https://rawg.io/apidocs) is used to fetch the required data. 
-For authentication purposes, I've used [Auth0](https://auth0.com/).
+For authentication purposes, I've used [Auth0](https://auth0.com/). I deployed this project on [heroku](heroku.com) using its free-tier hosting service. I have also used [freenom](freenom.com) to register mycatlog.tk domain which is free for the first 12 months.
 
 
 ## About My Catlog
@@ -17,17 +17,18 @@ This webiste esentially allows you to organize and keep track of your progress i
 * React.js
 * Node.js
 * Express.js
-* Mongodb
+* MongoDB
 
 
 ### Project Setup
-The Frontend
+
+#### The Frontend
 1. Open a terminal in VS Code
 2. Type cd client
 3. Type yarn install
 4. Use yarn start to start the frontend environment.
 
-The Backend
+#### The Backend
 1. Open another terminal in VS Code
 2. Type cd server
 3. Type yarn install
