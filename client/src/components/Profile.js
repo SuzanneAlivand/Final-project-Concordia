@@ -36,15 +36,16 @@ const Profile = () => {
     setAcountOpen(!acountOpen);
   };
 
-  const handleDeleteAcount = () => {};
-  // const headers = { email: user.email };
-  // fetch("/api/delete-accont", { method: "DELETE", headers })
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     console.log(data.message);
-  //   })
-  //   .catch((error) => setError(true))
-  //   .finally(logout());
+  const handleDeleteAcount = () => {
+    const headers = { email: user.email };
+    fetch("/api/delete-accont", { method: "DELETE", headers })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.message);
+      })
+      .catch((error) => setError(true))
+      .finally(logout({ returnTo: window.location.origin }));
+  };
 
   if (!isLoading && !user) {
     return (
@@ -217,4 +218,3 @@ const Topic = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-

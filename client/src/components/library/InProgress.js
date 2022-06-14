@@ -9,16 +9,15 @@ import LibraryMenu from "../LibraryMenu";
 import Genres from "../gameParameters/Genres";
 import SpinnerOne from "../spinner/SpinnerOne";
 import { FiX } from "react-icons/fi";
-import Pagination from "../pagination/Pagination";
+import PaginationTwo from "../pagination/PaginationTwo";
 import Error from "../Error";
 
 const InProgress = () => {
+  const [currentItems, setCurrentItems] = useState([]);
   const { user, loginWithRedirect, isLoading } = useAuth0();
   const { inProgress, setInProgress } = useContext(LibraryContext);
   const [inProgressGames, setInProgressGames] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [page, setPage] = useState(1);
-  const [pageCount, setPageCount] = useState(0);
   const [error, setError] = useState(false);
 
   // get a list of backlog games'IDs from backend
@@ -28,7 +27,6 @@ const InProgress = () => {
       fetch("/api/inProgress", { headers })
         .then((res) => res.json())
         .then((data) => {
-          setPageCount(Math.ceil(data.data.length / 20));
           setInProgress(data.data);
         })
         .catch((error) => setError(true));
@@ -76,7 +74,6 @@ const InProgress = () => {
     fetch(`/api/inProgress-remove/${id}`, { method: "DELETE", headers })
       .then((res) => res.json())
       .then((data) => {
-        setPageCount(Math.ceil(data.data.length / 20));
         setInProgress(data.data);
       })
       .catch((error) => setError(true));
@@ -126,7 +123,7 @@ const InProgress = () => {
       {loaded && inProgressGames.length > 0 ? (
         <>
           <Games>
-            {inProgressGames.map((game, index) => {
+            {currentItems.map((game, index) => {
               return (
                 <Game>
                   <GameDiv key={`${index}backlog`}>
@@ -167,7 +164,10 @@ const InProgress = () => {
               );
             })}
           </Games>
-          <Pagination setPage={setPage} pageCount={pageCount} />
+          <PaginationTwo
+            setCurrentItems={setCurrentItems}
+            items={inProgressGames}
+          />
         </>
       ) : (
         <SpinnerOne />

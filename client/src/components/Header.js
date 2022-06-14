@@ -23,7 +23,7 @@ const Header = () => {
     loginWithRedirect();
   };
   const handleLogOut = () => {
-    logout();
+    logout({ returnTo: window.location.origin });
   };
   const handleSignUp = () => {
     loginWithRedirect();

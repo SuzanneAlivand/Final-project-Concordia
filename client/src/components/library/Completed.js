@@ -9,16 +9,15 @@ import LibraryMenu from "../LibraryMenu";
 import Genres from "../gameParameters/Genres";
 import SpinnerOne from "../spinner/SpinnerOne";
 import { FiX } from "react-icons/fi";
-import Pagination from "../pagination/Pagination";
+import PaginationTwo from "../pagination/PaginationTwo";
 import Error from "../Error";
 
 const Completed = () => {
+  const [currentItems, setCurrentItems] = useState([]);
   const { user, loginWithRedirect, isLoading } = useAuth0();
   const { completed, setCompleted } = useContext(LibraryContext);
   const [completedGame, setCompletedGame] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [page, setPage] = useState(1);
-  const [pageCount, setPageCount] = useState(0);
   const [error, setError] = useState(false);
 
   // get a list of backlog games'IDs from backend
@@ -28,7 +27,6 @@ const Completed = () => {
       fetch("/api/completed", { headers })
         .then((res) => res.json())
         .then((data) => {
-          setPageCount(Math.ceil(data.data.length / 20));
           setCompleted(data.data);
         })
         .catch((error) => setError(true));
@@ -76,7 +74,6 @@ const Completed = () => {
     fetch(`/api/completed-remove/${id}`, { method: "DELETE", headers })
       .then((res) => res.json())
       .then((data) => {
-        setPageCount(Math.ceil(data.data.length / 20));
         setCompleted(data.data);
       })
       .catch((error) => setError(true));
@@ -124,7 +121,7 @@ const Completed = () => {
       {loaded && completedGame.length > 0 ? (
         <>
           <Games>
-            {completedGame.map((game, index) => {
+            {currentItems.map((game, index) => {
               return (
                 <Game>
                   <GameDiv key={`${index}backlog`}>
@@ -165,7 +162,10 @@ const Completed = () => {
               );
             })}
           </Games>
-          <Pagination setPage={setPage} pageCount={pageCount} />
+          <PaginationTwo
+            setCurrentItems={setCurrentItems}
+            items={completedGame}
+          />
         </>
       ) : (
         <SpinnerOne />
