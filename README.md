@@ -39,7 +39,9 @@ You will need an API key from rawg.io in order to run this project. I've also us
 
 ## Deployed Heroku Link
  
- [mycatlog.tk](https://mycatlog.tk)
+ #### [mycatlog.tk](https://mycatlog.tk)
+
 
 ## Youtube Demo
+
 In progress.
