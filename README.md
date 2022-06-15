@@ -73,4 +73,4 @@ You are going to need an API key from **rawg.io** in order to run this project. 
 
 ## Youtube Demo 📺
 
-In progress.
+[https://www.youtube.com/watch?v=HPat36uDsIA](https://www.youtube.com/watch?v=HPat36uDsIA)
